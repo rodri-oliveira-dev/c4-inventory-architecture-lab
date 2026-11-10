@@ -1,8 +1,26 @@
-// Visão mínima para confirmar a navegação inicial e o modelo agregado.
-// A etapa 2 substituirá/expandirá esta visão com Contexto e Contêineres.
+// Etapa LikeC4 2: as duas projeções usam SOMENTE elementos/relações de model.c4.
+// index (L1) agrega as relações dos filhos de estoque à fronteira do sistema.
+// conteineres (L2) expande os quatro filhos sem redefinir sistemas/atores.
 views {
   view index {
-    title 'Panorama inicial - Sistema de Gestão de Estoque'
+    title 'Nível 1 - Contexto do Sistema de Gestão de Estoque'
+    description 'Pessoas, sistema central e integrações externas, sem detalhes internos.'
     include *
+
+    // A navegação no sistema abre a visão dos seus contêineres.
+    include estoque with {
+      navigateTo conteineres
+    }
+
+    autoLayout LeftRight
+  }
+
+  // Escopo = o mesmo sistema central; sem uma segunda definição do sistema.
+  // O wildcard inclui seus filhos e as interações com elementos externos.
+  view conteineres of estoque {
+    title 'Nível 2 - Contêineres do Sistema de Gestão de Estoque'
+    description 'Aplicação Web, API de Estoque, Worker, PostgreSQL e integrações externas.'
+    include *
+    autoLayout LeftRight
   }
 }

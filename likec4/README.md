@@ -1,8 +1,8 @@
-# LikeC4: fundação do modelo de arquitetura
+# LikeC4: modelo de arquitetura e visões C4
 
 Este diretório inicia uma **segunda representação do mesmo sistema** descrito nos quatro níveis [Mermaid](../docs/README.md). Aqui, o LikeC4 modela **elementos e relações uma única vez** e constrói visualizações derivadas, sem criar novos serviços de software ou outra arquitetura.
 
-**Estado atual:** etapa **1 de 5** da trilha LikeC4. Existe uma visão inicial `index` para experimentar o modelo; os diagramas definitivos e a comparação visual serão desenvolvidos nas etapas seguintes. Os seis blocos Mermaid dos capítulos originais continuam sendo as representações publicadas, e **não são gerados automaticamente a partir do LikeC4** nesta fase.
+**Estado atual:** etapa **2 de 5** da trilha LikeC4. As visões de [**Contexto e Contêineres**](visoes-contexto-conteineres.md) estão definidas em `views.c4` como projeções do modelo compartilhado. Os seis blocos Mermaid dos capítulos originais continuam disponíveis e **não são gerados automaticamente a partir do LikeC4**.
 
 ## Estrutura
 
@@ -10,8 +10,9 @@ Este diretório inicia uma **segunda representação do mesmo sistema** descrito
 | --- | --- |
 | [`likec4.config.json`](likec4.config.json) | Configuração e identificação do projeto LikeC4. |
 | [`specification.c4`](specification.c4) | Vocabulário único: ator, sistema, sistema externo, aplicação, banco e componente. |
-| [`model.c4`](model.c4) | Atores, fronteira do sistema, quatro contêineres e sete relações de referência. |
-| [`views.c4`](views.c4) | Visão `index` inicial; a etapa 2 adicionará níveis 1 e 2 explícitos. |
+| [`model.c4`](model.c4) | Atores, fronteira do sistema, quatro contêineres e sete relações com tecnologias de comunicação. |
+| [`views.c4`](views.c4) | Duas visões: `index` (contexto) e `conteineres` (fronteira ampliada do sistema). |
+| [**Contexto e Contêineres**](visoes-contexto-conteineres.md) | Guia comparativo das duas visões, seus participantes, fluxos e limites. |
 
 ## Tecnologias e requisitos
 
@@ -29,7 +30,14 @@ npm run likec4:dev
 
 O comando `likec4:dev` inicia uma prévia interativa local (porta padrão 5173). O comando `likec4:validate` verifica o modelo de referência. Para formatar os arquivos `.c4`, use `npm run likec4:format`.
 
-O workflow [Documentation Quality](../.github/workflows/docs-quality.yml) executa a validação inicial do LikeC4 após instalar as dependências npm. O tratamento completo de geração, publicação de artefatos e integração contínua para **todas as visões** pertence à etapa 5.
+O workflow [Documentation Quality](../.github/workflows/docs-quality.yml) executa a validação do modelo LikeC4 após instalar as dependências npm. A exportação e publicação automatizadas das visões pertencem à etapa 5.
+
+## As duas visões disponíveis
+
+- **[`index`: Nível 1 / Contexto](visoes-contexto-conteineres.md#nível-1-contexto-index):** duas pessoas, sistema central e dois sistemas externos; quatro relações de negócio inferidas do modelo.
+- **[`conteineres`: Nível 2 / Contêineres](visoes-contexto-conteineres.md#nível-2-contêineres-conteineres):** fronteira do sistema ampliada, com quatro contêineres, participantes externos e sete relações. Ao selecionar o sistema na visão `index`, a navegação abre `conteineres`.
+
+Os detalhes, protocolos e critérios de comparação com Mermaid estão no [guia das visões](visoes-contexto-conteineres.md).
 
 ## Modelo compartilhado e invariantes
 
@@ -51,8 +59,8 @@ O cenário de referência continua sendo a saída de **10 unidades** de `SKU-001
 
 ## Próximas etapas da trilha LikeC4
 
-1. **Fundação (esta etapa):** configuração, vocabulário, modelo compartilhado e visão inicial.
-2. **Contexto e Contêineres:** vistas explícitas de níveis 1 e 2, com os mesmos limites de sistema.
+1. **Fundação (concluída):** configuração, vocabulário e modelo compartilhado.
+2. **Contexto e Contêineres (concluída nesta branch):** vistas de níveis 1 e 2 com as mesmas fronteiras do Mermaid.
 3. **Componentes e Código:** aprofundar a API; manter o diagrama UML de classes em Mermaid, sem tentar converter métodos C# em caixas do LikeC4.
 4. **Fluxos dinâmicos:** modelar a baixa e o processamento eventual da outbox.
 5. **CI/CD e publicação:** exportar, validar e disponibilizar as visões, atualizar índices e comparar ambas as representações.

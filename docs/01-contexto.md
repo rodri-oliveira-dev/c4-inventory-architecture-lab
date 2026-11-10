@@ -4,7 +4,7 @@
 
 O **System Context** é a visão mais ampla do [Modelo C4](https://c4model.com/diagrams/system-context). Ele apresenta o sistema de software sob análise, as pessoas que o utilizam e suas integrações externas. O público inclui pessoas de negócio, analistas, desenvolvedores e demais interessados. **Não é necessário conhecer .NET ou PostgreSQL para compreender este diagrama.**
 
-Neste laboratório, o sistema central é o **Sistema de Gestão de Estoque**. Todos os elementos desenhados ao seu redor estão fora da sua fronteira.
+Neste laboratório, o sistema central é o **Sistema de Gestão de Estoque**. Todos os elementos desenhados ao seu redor estão fora da sua fronteira. A [visão equivalente em LikeC4](../likec4/visoes-contexto-conteineres.md#nível-1-contexto-index) utiliza `view index` com as mesmas fronteiras de negócio.
 
 ## Diagrama de contexto
 
