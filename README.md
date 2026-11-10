@@ -28,7 +28,7 @@ O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiro
 
 ## LikeC4: segunda representação arquitetural
 
-Além dos diagramas Mermaid existentes, iniciamos a [alternativa LikeC4](likec4/README.md), baseada em **um modelo arquitetural compartilhado**. A fundação define atores, integrações e contêineres; a etapa 2 acrescentou as visões de [**Contexto e Contêineres**](likec4/visoes-contexto-conteineres.md), e a etapa 3 abre [**os cinco Componentes da API**](likec4/visao-componentes.md) a partir do mesmo modelo. Os capítulos Mermaid continuam disponíveis em paralelo.
+Além dos diagramas Mermaid existentes, iniciamos a [alternativa LikeC4](likec4/README.md), baseada em **um modelo arquitetural compartilhado**. A fundação define atores, integrações e contêineres; a etapa 2 acrescentou as visões de [**Contexto e Contêineres**](likec4/visoes-contexto-conteineres.md), e a etapa 3 abre [**os cinco Componentes da API**](likec4/visao-componentes.md) a partir do mesmo modelo. A etapa 4 acrescenta [**dois fluxos dinâmicos**](likec4/fluxos-dinamicos.md): baixa transacional e entrega eventual da outbox. Os capítulos Mermaid continuam disponíveis em paralelo.
 
 Para explorar o modelo (Node.js 22):
 
@@ -38,7 +38,7 @@ npm run likec4:validate
 npm run likec4:dev
 ```
 
-O servidor de prévia LikeC4 usa o modelo em `likec4/`. A visualização `index` representa o **nível 1**, com navegação para `conteineres` (**nível 2**) e, na API, para `componentes` (**nível 3**). O **nível 4** segue com `classDiagram` Mermaid. As próximas etapas incluem fluxos dinâmicos e publicação, em PRs independentes. Consulte as [convenções e o roteiro](likec4/README.md). A validação inicial do modelo está incluída no workflow [Documentation Quality](.github/workflows/docs-quality.yml).
+O servidor de prévia LikeC4 usa o modelo em `likec4/`. A visualização `index` representa o **nível 1**, com navegação para `conteineres` (**nível 2**) e, na API, para `componentes` (**nível 3**). O **nível 4** segue com `classDiagram` Mermaid. As duas visões de sequência LikeC4 são `registrarSaida` e `entregarAlerta`; a exportação e publicação são a próxima etapa, em PR independente. Consulte as [convenções e o roteiro](likec4/README.md). A validação inicial do modelo está incluída no workflow [Documentation Quality](.github/workflows/docs-quality.yml).
 
 ## Arquitetura que será documentada
 

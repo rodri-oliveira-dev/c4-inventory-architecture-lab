@@ -2,7 +2,7 @@
 
 Este diretório inicia uma **segunda representação do mesmo sistema** descrito nos quatro níveis [Mermaid](../docs/README.md). Aqui, o LikeC4 modela **elementos e relações uma única vez** e constrói visualizações derivadas, sem criar novos serviços de software ou outra arquitetura.
 
-**Estado atual:** etapa **3 de 5** da trilha LikeC4. [Contexto e Contêineres](visoes-contexto-conteineres.md) e [Componentes da API](visao-componentes.md) são três projeções do mesmo modelo. O nível 4 (Code) permanece em Mermaid, assim como os diagramas de sequência originais, e **não é gerado automaticamente pelo LikeC4**.
+**Estado atual:** etapa **4 de 5** da trilha LikeC4. As três visões estruturais de [Contexto, Contêineres](visoes-contexto-conteineres.md) e [Componentes da API](visao-componentes.md) agora convivem com dois [fluxos dinâmicos em sequência](fluxos-dinamicos.md). O nível 4 (Code) e os diagramas de sequência originais permanecem em Mermaid; LikeC4 **não gera automaticamente** os capítulos Mermaid nesta fase.
 
 ## Estrutura
 
@@ -11,9 +11,11 @@ Este diretório inicia uma **segunda representação do mesmo sistema** descrito
 | [`likec4.config.json`](likec4.config.json) | Configuração e identificação do projeto LikeC4. |
 | [`specification.c4`](specification.c4) | Vocabulário único: ator, sistema, sistema externo, aplicação, banco e componente. |
 | [`model.c4`](model.c4) | Atores, sistema, quatro contêineres, cinco componentes na API e relações compartilhadas em diferentes níveis. |
-| [`views.c4`](views.c4) | Três visões: `index` (contexto), `conteineres` (sistema ampliado) e `componentes` (API ampliada). |
+| [`views.c4`](views.c4) | Três visões estáticas: `index` (contexto), `conteineres` (sistema ampliado) e `componentes` (API ampliada). |
+| [`dynamics.c4`](dynamics.c4) | Duas visões dinâmicas: `registrarSaida` e `entregarAlerta`, com participantes do modelo existente. |
 | [**Contexto e Contêineres**](visoes-contexto-conteineres.md) | Guia das duas primeiras visões e suas fronteiras. |
 | [**Componentes da API**](visao-componentes.md) | Zoom no contêiner API, cinco componentes, dependências e comparação com Mermaid. |
+| [**Fluxos dinâmicos**](fluxos-dinamicos.md) | Confirmação síncrona da baixa e envio eventual do alerta, com comparativo Mermaid/LikeC4. |
 
 ## Tecnologias e requisitos
 
@@ -41,6 +43,13 @@ O workflow [Documentation Quality](../.github/workflows/docs-quality.yml) execut
 
 Os detalhes, protocolos e critérios de comparação com Mermaid estão nos guias de [Contexto e Contêineres](visoes-contexto-conteineres.md) e de [Componentes da API](visao-componentes.md).
 
+## Fluxos dinâmicos disponíveis
+
+- **[`registrarSaida`: saída síncrona](fluxos-dinamicos.md#1-registrarsaida-baixa-e-confirmação-síncrona):** Sistema de Vendas, endpoints, caso de uso, persistência, regras e PostgreSQL, com commit antes da resposta.
+- **[`entregarAlerta`: entrega eventual](fluxos-dinamicos.md#2-entregaralerta-outbox-e-entrega-eventual):** Worker, PostgreSQL e provedor; alternativas para confirmação e falha/timeout, sem prometer entrega exatamente uma vez.
+
+Ambos os fluxos usam `variant sequence` e reutilizam participantes de `model.c4`. A [documentação da etapa 4](fluxos-dinamicos.md) detalha as invariantes de concorrência, idempotência e outbox.
+
 ## Modelo compartilhado e invariantes
 
 **Fronteira:** `estoque` é o **Sistema de Gestão de Estoque**, com os contêineres `estoque.web`, `estoque.api`, `estoque.worker` e `estoque.banco`. Somente `estoque.api` contém cinco componentes. Pessoas e sistemas externos permanecem fora da fronteira de `estoque`.
@@ -64,8 +73,8 @@ O cenário de referência continua sendo a saída de **10 unidades** de `SKU-001
 
 1. **Fundação (concluída):** configuração, vocabulário e modelo compartilhado.
 2. **Contexto e Contêineres (concluída):** visões de níveis 1 e 2 com as mesmas fronteiras do Mermaid.
-3. **Componentes e Código (concluída nesta branch):** aprofundar a API nos cinco componentes; manter o diagrama UML de classes em Mermaid, sem tentar converter métodos C# em caixas do LikeC4.
-4. **Fluxos dinâmicos:** modelar a baixa e o processamento eventual da outbox.
+3. **Componentes e Código (concluída):** aprofundar a API nos cinco componentes; manter o diagrama UML de classes em Mermaid.
+4. **Fluxos dinâmicos (concluída nesta branch):** modelar baixa síncrona e processamento eventual da outbox como visões de sequência LikeC4.
 5. **CI/CD e publicação:** exportar, validar e disponibilizar as visões, atualizar índices e comparar ambas as representações.
 
 **Orientação editorial:** ao alterar um componente ou relacionamento em uma das representações, revisar a outra no mesmo PR para não manter duas arquiteturas contraditórias. A eventual geração automática das representações será avaliada no encerramento da trilha.

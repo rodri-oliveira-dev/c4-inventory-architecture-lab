@@ -2,7 +2,7 @@
 
 > **Pergunta:** em qual ordem os elementos colaboram para registrar uma baixa, manter o saldo consistente e solicitar um alerta posteriormente?
 
-Este capítulo é uma **visão dinâmica complementar**, não um quinto nível C4. Usamos `sequenceDiagram` do Mermaid para explicar o comportamento em execução do caso `RegistrarSaida`, cuja estrutura está documentada nos níveis [1](01-contexto.md), [2](02-containers.md), [3](03-componentes.md) e [4](04-codigo.md).
+Este capítulo é uma **visão dinâmica complementar**, não um quinto nível C4. O [equivalente em LikeC4](../likec4/fluxos-dinamicos.md) reutiliza os participantes do modelo arquitetural compartilhado para representar a baixa síncrona e o processamento posterior da outbox. Usamos `sequenceDiagram` do Mermaid para explicar o comportamento em execução do caso `RegistrarSaida`, cuja estrutura está documentada nos níveis [1](01-contexto.md), [2](02-containers.md), [3](03-componentes.md) e [4](04-codigo.md).
 
 **Cenário transversal:** o produto `SKU-001` possui **15 unidades**, estoque mínimo de **5**, e o Sistema de Vendas solicita a baixa de **10 unidades**, com chave de origem estável `V-100`.
 
