@@ -1,6 +1,6 @@
 # Contrato de persistência: concorrência, idempotência e outbox
 
-Este capítulo complementa o [nível 4: Código](../docs/04-codigo.md) e o [exemplo C# de `RegistrarSaida`](registrar-saida.md). **Não é uma implementação de banco, uma migration ou SQL de produção**: descreve quais garantias uma implementação de `IRegistroSaidaTransacional` precisa oferecer.
+Este capítulo complementa o [nível 4: Código](../docs/04-codigo.md), o [exemplo C# de `RegistrarSaida`](registrar-saida.md) e os [diagramas de sequência](../docs/fluxo-movimentacao.md). **Não é uma implementação de banco, uma migration ou SQL de produção**: descreve quais garantias uma implementação de `IRegistroSaidaTransacional` precisa oferecer.
 
 ## 1. Invariantes que pertencem à transação
 

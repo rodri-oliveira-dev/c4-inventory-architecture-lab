@@ -83,7 +83,7 @@ Considere o produto `SKU-001`, com **15 unidades** e **estoque mínimo 5**, conf
 | Saldo 15 → 5 com mínimo 5 | Registrar **um evento lógico de cruzamento** na outbox na transação da baixa. | Regras detecta cruzamento; Persistência grava a intenção. |
 | Provedor de notificações indisponível | Baixa permanece confirmada; envio é tentado posteriormente. | Worker e outbox (fora da execução síncrona da API). |
 
-A configuração de autenticação, tratamento global de erros, observabilidade e outras preocupações transversais é relevante em projetos reais, mas foi omitida do desenho para não transformar um exercício de C4 em um blueprint de produção.
+A configuração de autenticação, tratamento global de erros, observabilidade e outras preocupações transversais é relevante em projetos reais, mas foi omitida do desenho para não transformar um exercício de C4 em um blueprint de produção. A [sequência da movimentação](fluxo-movimentacao.md) apresenta a ordem das colaborações.
 
 ## Rastreabilidade entre os níveis
 

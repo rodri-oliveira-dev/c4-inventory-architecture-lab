@@ -42,10 +42,10 @@ Essas escolhas são **hipóteses didáticas**, não recomendações universais. 
 3. **Nível 2:** [contêineres do sistema](docs/02-containers.md) (disponível).
 4. **Nível 3:** [componentes internos da API](docs/03-componentes.md) (disponível).
 5. **Nível 4:** [classes e exemplos ilustrativos em C#](docs/04-codigo.md) (disponível).
-6. **Fluxos e decisões:** sequência da movimentação e aprofundamento dos ADRs iniciais.
+6. **Fluxos e decisões:** [sequência da movimentação](docs/fluxo-movimentacao.md) e aprofundamento dos ADRs 0003 a 0007 (disponível).
 7. **Qualidade e publicação:** validação de diagramas e links, revisão e preparação da versão 1.0.0. A validação dos ADRs foi antecipada para a etapa 1.
 
-Os quatro níveis já estão documentados: [Contexto](docs/01-contexto.md), [Contêineres](docs/02-containers.md), [Componentes](docs/03-componentes.md) e [Código](docs/04-codigo.md). O nível 4 utiliza o `classDiagram` do Mermaid e pequenos [exemplos C#](examples/registrar-saida.md). Fluxos complementares e validação automatizada de diagramas permanecem nas etapas seguintes.
+Os quatro níveis já estão documentados: [Contexto](docs/01-contexto.md), [Contêineres](docs/02-containers.md), [Componentes](docs/03-componentes.md) e [Código](docs/04-codigo.md). O nível 4 utiliza `classDiagram` e pequenos [exemplos C#](examples/registrar-saida.md). O [fluxo de movimentação](docs/fluxo-movimentacao.md) ilustra a confirmação transacional e a entrega eventual. A validação automatizada dos diagramas está prevista para a etapa 7.
 
 ## Comece por aqui
 
@@ -53,12 +53,13 @@ Os quatro níveis já estão documentados: [Contexto](docs/01-contexto.md), [Con
 2. [Nível 2: Contêineres do Sistema de Gestão de Estoque](docs/02-containers.md)
 3. [Nível 3: Componentes da API de Estoque](docs/03-componentes.md)
 4. [Nível 4: Código do caso de uso RegistrarSaida](docs/04-codigo.md)
-5. [Exemplos C# e persistência](examples/README.md)
-6. [Índice da documentação](docs/README.md)
-7. [Escopo e regras de negócio](docs/escopo-funcional.md)
-8. [Arquitetura de referência](docs/arquitetura-referencia.md)
-9. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
-10. [Decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md)
+5. [Fluxo de movimentação: sequência e falhas](docs/fluxo-movimentacao.md)
+6. [Exemplos C# e persistência](examples/README.md)
+7. [Índice da documentação](docs/README.md)
+8. [Escopo e regras de negócio](docs/escopo-funcional.md)
+9. [Arquitetura de referência](docs/arquitetura-referencia.md)
+10. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
+11. [Decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md)
 
 ## Validação de decisões arquiteturais
 

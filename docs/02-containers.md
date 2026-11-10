@@ -77,7 +77,7 @@ O mesmo [cenário do nível 1](01-contexto.md#o-mesmo-caso-de-uso-em-uma-visão-
 4. Depois da confirmação transacional, a **API** responde ao solicitante. Uma repetição da mesma requisição externa não realiza uma nova baixa.
 5. Em momento posterior, o **Worker** consulta a outbox no **PostgreSQL**, solicita envio ao **Provedor de Notificações** e registra o resultado ou uma nova tentativa.
 
-Essa descrição indica **que contêiner faz o quê**. A ordem detalhada das mensagens e dos retries será objeto de um diagrama de sequência na etapa 6.
+Essa descrição indica **que contêiner faz o quê**. A ordem das mensagens, a separação entre commit e envio e os retries são detalhados no [fluxo de movimentação](fluxo-movimentacao.md).
 
 ### Consistência e falhas
 

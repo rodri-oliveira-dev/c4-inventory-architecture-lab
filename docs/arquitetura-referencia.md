@@ -47,6 +47,8 @@ O [nível 4](04-codigo.md) detalha um recorte de classes da saída de estoque, i
 
 ## 5. Fluxo principal: baixa de 10 unidades
 
+A [sequência da movimentação](fluxo-movimentacao.md) explicita a ordem de execução, a fronteira do commit e o envio eventual do alerta.
+
 1. **Aplicação Web ou Sistema de Vendas → API:** solicita saída de 10 unidades.
 2. **API:** valida entrada e idempotência; aplica regras do domínio.
 3. **API → PostgreSQL:** realiza uma operação transacional que protege o saldo contra concorrência, registra a movimentação e, se necessário, cria item de outbox.
