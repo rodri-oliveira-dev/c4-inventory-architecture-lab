@@ -23,7 +23,7 @@ jobs:
           persist-credentials: false
 
       - name: Validate architecture decision records
-        uses: rodri-oliveira-dev/adr-guard@v1.10.0
+        uses: rodri-oliveira-dev/adr-guard@v1.11.0
         with:
           path: docs/adr
           command: check
