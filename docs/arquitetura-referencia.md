@@ -4,7 +4,7 @@
 
 Esta é uma **arquitetura hipotética para ensino do C4**, não a descrição de um serviço implementado. Escolhemos poucos elementos e um único caso de uso para manter os quatro níveis coerentes.
 
-**Sistema sob análise:** Sistema de Gestão de Estoque.
+**Sistema sob análise:** Sistema de Gestão de Estoque. Consulte os diagramas [nível 1: Contexto](01-contexto.md) e [nível 2: Contêineres](02-containers.md).
 
 ## 2. Contêineres previstos
 
