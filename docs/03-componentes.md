@@ -106,14 +106,14 @@ As decisões de referência seguem registradas como **Proposed**, especialmente 
 
 ## Próximo zoom: nível 4 (Code)
 
-A etapa 5 documentará, com `classDiagram` e pequenos exemplos C#, **um recorte** da operação `RegistrarSaida`, mostrando:
+O [nível 4: Código](04-codigo.md) documenta, com `classDiagram` e pequenos exemplos C#, **um recorte** da operação `RegistrarSaida`, mostrando:
 
 - o caso de uso que orquestra a baixa;
 - os objetos de domínio que aplicam invariantes do saldo;
 - as interfaces de persistência consumidas pela aplicação;
 - os registros de movimentação, referência de origem e outbox, com limites transacionais claros.
 
-Os nomes concretos de classes, assinaturas de métodos e mecanismos exatos de concorrência **não** fazem parte deste diagrama. Não haverá implementação integral da aplicação.
+Os nomes concretos de classes, assinaturas de métodos e um mecanismo ilustrativo de concorrência estão no [capítulo de código](04-codigo.md), não neste diagrama de componentes. Não haverá implementação integral da aplicação.
 
 **Voltar:** [nível 2: Contêineres](02-containers.md) · [nível 1: Contexto](01-contexto.md) · [guia C4 e Mermaid](guia-c4.md).
 
