@@ -46,10 +46,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # The hosted Ubuntu 24.04 runner restricts Chromium user namespaces.
+          # Limit this Puppeteer workaround to the disposable CI runner.
+          printf '%s\n' '{"args":["--no-sandbox","--disable-setuid-sandbox"]}' \
+            > "$RUNNER_TEMP/puppeteer-config.json"
           count=0
           while IFS= read -r -d '' source; do
             target="${source%.mmd}.svg"
             "$RUNNER_TEMP/mermaid-cli/node_modules/.bin/mmdc" \
+              -p "$RUNNER_TEMP/puppeteer-config.json" \
               -i "$source" -o "$target"
             test -s "$target"
             count=$((count + 1))
