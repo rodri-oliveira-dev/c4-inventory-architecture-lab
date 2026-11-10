@@ -1,6 +1,6 @@
 # Documentação
 
-Este índice orienta a leitura do laboratório. O **nível 1** já está disponível em Mermaid; os níveis 2 a 4 e os fluxos complementares serão documentados progressivamente.
+Este índice orienta a leitura do laboratório. Os **níveis 1 e 2** já estão disponíveis em Mermaid; os níveis 3 e 4 e os fluxos complementares serão documentados progressivamente.
 
 ## Fundação (etapa 1)
 
@@ -15,9 +15,9 @@ Este índice orienta a leitura do laboratório. O **nível 1** já está dispon�
 ## C4: diagramas por nível
 
 - **Etapa 2 (disponível):** [Nível 1: Contexto do sistema](01-contexto.md) — atores, integrações e fronteira do sistema.
+- **Etapa 3 (disponível):** [Nível 2: Contêineres](02-containers.md) — aplicações executáveis, armazenamento, tecnologias e comunicação.
 
 ## Próximos documentos
-- **Etapa 3:** `docs/02-containers.md` — aplicações e bancos (nível 2).
 - **Etapa 4:** `docs/03-componentes.md` — interior da API (nível 3).
 - **Etapa 5:** `docs/04-codigo.md` — classes e relações (nível 4).
 - **Etapa 6:** `docs/fluxo-movimentacao.md` e aprofundamento/revisão dos ADRs já registrados.

@@ -77,7 +77,7 @@ A ausência desses detalhes **não** significa que eles não existam. O nível 1
 
 No nível 2, o `System` central deste diagrama será **ampliado** para revelar os seus contêineres internos. O **Sistema de Vendas** e o **Provedor de Notificações** permanecerão externos; o **Operador de estoque** e o **Gestor de estoque** continuarão sendo pessoas. As quatro relações conceituais aqui apresentadas devem ser atribuídas aos contêineres corretos, sem mudar a responsabilidade de cada participante.
 
-**Próxima leitura:** [Arquitetura de referência](arquitetura-referencia.md) e [convenções do C4](guia-c4.md). A etapa 3 criará o capítulo `docs/02-containers.md`.
+**Próxima leitura:** [Nível 2: Contêineres](02-containers.md), que amplia a fronteira do sistema para apresentar suas aplicações e seu banco de dados. Consulte também a [arquitetura de referência](arquitetura-referencia.md) e as [convenções do C4](guia-c4.md).
 
 ### Referências
 
