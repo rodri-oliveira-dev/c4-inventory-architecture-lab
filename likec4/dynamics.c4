@@ -1,0 +1,51 @@
+// Etapa LikeC4 4: visoes temporais sobre elementos ja definidos em model.c4.
+// Nenhum componente, banco ou servico adicional e definido nestas visoes.
+// Em sequencia, todos os participantes sao elementos folha do modelo.
+views {
+  dynamic view registrarSaida {
+    title 'Saída de estoque - confirmação síncrona'
+    description 'Baixa de 10 unidades de SKU-001: saldo 15 para 5, idempotência e outbox na mesma transação. A resposta só ocorre após COMMIT.'
+    variant sequence
+
+    vendas -> estoque.api.http 'Solicita saída de 10, SKU-001, referência V-100'
+    estoque.api.http -> estoque.api.movimentacoes 'Executar RegistrarSaida'
+    estoque.api.movimentacoes -> estoque.api.persistencia 'RegistrarAsync(comando, planejar)'
+
+    estoque.api.persistencia -> estoque.banco 'BEGIN e bloqueio da linha SKU-001 (FOR UPDATE)'
+    estoque.api.persistencia <- estoque.banco 'Saldo protegido 15; mínimo 5'
+    estoque.api.persistencia -> estoque.banco 'Reconsulta chave de origem V-100 após bloqueio'
+    estoque.api.persistencia <- estoque.banco 'Nenhuma baixa confirmada com a chave'
+    estoque.api.persistencia -> estoque.api.regras 'PlanejarSaida(10) sobre estado protegido'
+    estoque.api.persistencia <- estoque.api.regras 'PlanoSaida(15, 5, DeveNotificar=true)'
+
+    estoque.api.persistencia -> estoque.banco 'Atualiza saldo 5; grava movimento, referência e outbox'
+    estoque.api.persistencia -> estoque.banco 'COMMIT atômico'
+    estoque.api.persistencia <- estoque.banco 'Transação confirmada'
+    estoque.api.movimentacoes <- estoque.api.persistencia 'SaidaRegistrada(saldo=5, alertaRegistrado=true)'
+    estoque.api.http <- estoque.api.movimentacoes 'Resultado após commit'
+    vendas <- estoque.api.http 'Sucesso; saldo 5; identificador da movimentação'
+  }
+
+  dynamic view entregarAlerta {
+    title 'Alerta de estoque mínimo - entrega assíncrona'
+    description 'O worker processa a outbox após o commit. Falhas e timeouts permitem retries, sem alterar saldo nem prometer exactly once.'
+    variant sequence
+
+    estoque.worker -> estoque.banco 'Depois do commit: busca e reivindica item pendente'
+    estoque.worker <- estoque.banco 'Outbox confirmada para SKU-001'
+    estoque.worker -> notificacoes 'Solicita envio de alerta com identificador estável'
+
+    alt {
+      when 'Provedor confirma envio' {
+        estoque.worker <- notificacoes 'Confirma processamento'
+        estoque.worker -> estoque.banco 'Marca item da outbox como processado'
+        estoque.worker <- estoque.banco 'Estado atualizado'
+      }
+      else 'Falha, timeout ou confirmação perdida' {
+        // A falta de resposta não é representada como mensagem do provedor.
+        estoque.worker -> estoque.banco 'Registra tentativa e agenda nova execução'
+        estoque.worker <- estoque.banco 'Item permanece elegível a retry'
+      }
+    }
+  }
+}

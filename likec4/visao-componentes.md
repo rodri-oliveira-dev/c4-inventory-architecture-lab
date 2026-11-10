@@ -82,7 +82,7 @@ O [diagrama de classes `classDiagram`](../docs/04-codigo.md) permanece no **Merm
 
 ## Próximas etapas
 
-- **Etapa 4:** usar visões dinâmicas LikeC4 para a confirmação síncrona de `RegistrarSaida` e o processamento eventual do alerta.
+- **Etapa 4 (disponível):** [visões dinâmicas LikeC4](fluxos-dinamicos.md) para a confirmação síncrona de `RegistrarSaida` e o processamento eventual do alerta.
 - **Etapa 5:** automatizar exportação e publicação, revisar visualmente e comparar as duas abordagens sem perder a fonte única do modelo LikeC4.
 
 ### Referências
