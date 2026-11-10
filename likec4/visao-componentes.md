@@ -33,7 +33,7 @@ O agrupamento corresponde aos cinco componentes do [diagrama Mermaid nível 3](.
 | Persistência → PostgreSQL | Ler e gravar dados em transação |
 | Worker → PostgreSQL | Consumir e atualizar o estado da outbox, **posteriormente** |
 
-Os oito vínculos que envolvem os componentes internos e suas bordas de entrada/saída estão definidos uma só vez em `model.c4`. O relacionamento **Worker → PostgreSQL** já existe desde a fundação e aparece no nível 3 para esclarecer que o consumo da outbox não passa pela API.
+Os **nove vínculos envolvendo os componentes** (dois de entrada, seis entre componentes e um de saída para o banco) estão definidos uma só vez em `model.c4`. O relacionamento **Worker → PostgreSQL** já existe desde a fundação e aparece no nível 3 para esclarecer que o consumo da outbox não passa pela API.
 
 **Atenção:** entre componentes, as setas indicam dependência **lógica**, e não requisições de rede. O banco é acessado pelo adaptador de persistência; o domínio não possui dependência SQL. O worker não altera saldo nem histórico de movimentações.
 
