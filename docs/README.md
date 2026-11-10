@@ -23,9 +23,13 @@ Este índice orienta a leitura do laboratório. Os **quatro níveis do C4** est�
 
 **Exemplos de apoio:** [C# do caso de uso](../examples/registrar-saida.md) · [consistência transacional, idempotência e outbox](../examples/persistencia-transacional.md).
 
-## Próximos documentos
-- **Etapa 7:** automação de diagramas Mermaid e documentação de publicação. A automação de ADRs foi antecipada para a etapa 1.
+## Qualidade e publicação (etapa 7)
 
-Os caminhos acima são **planejados**, portanto ainda não são links navegáveis.
+- [Automação: Documentation Quality](../.github/workflows/docs-quality.yml) — verifica links e âncoras locais e renderiza os seis blocos Mermaid com versão fixa da CLI.
+- [Validador Markdown e Mermaid](../scripts/validate_docs.py) — mantém os capítulos Markdown como fonte única dos diagramas.
+- [Checklist para a release v1.0.0](publicacao.md) — revisão, verificações e publicação manual após merge.
+- [Changelog](../CHANGELOG.md) — histórico das entregas.
+
+Os ADRs continuam validados pelo [ADR Guard](../.github/workflows/adr-guard.yml) como workflow independente.
 
 Veja também [orientações de contribuição](../CONTRIBUTING.md), [diagramas](../diagrams/README.md) e [exemplos C#](../examples/README.md).

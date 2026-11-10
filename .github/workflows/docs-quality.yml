@@ -1,0 +1,67 @@
+name: Documentation Quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  documentation:
+    name: Mermaid and Markdown links
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Test Markdown validation helpers
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Validate links and extract Mermaid blocks
+        run: python3 scripts/validate_docs.py --output-dir "$RUNNER_TEMP/mermaid"
+
+      - name: Install pinned Mermaid CLI
+        run: |
+          npm install --prefix "$RUNNER_TEMP/mermaid-cli" \
+            --no-save --no-package-lock --no-audit --no-fund \
+            @mermaid-js/mermaid-cli@11.17.1
+
+      - name: Render every Mermaid diagram
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          while IFS= read -r -d '' source; do
+            target="${source%.mmd}.svg"
+            "$RUNNER_TEMP/mermaid-cli/node_modules/.bin/mmdc" \
+              -i "$source" -o "$target"
+            test -s "$target"
+            count=$((count + 1))
+          done < <(find "$RUNNER_TEMP/mermaid" -type f -name '*.mmd' -print0 | sort -z)
+          test "$count" -ge 6
+          echo "Rendered $count Mermaid diagrams." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload diagram previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mermaid-diagram-previews
+          path: ${{ runner.temp }}/mermaid/*.svg
+          if-no-files-found: ignore
+          retention-days: 7
