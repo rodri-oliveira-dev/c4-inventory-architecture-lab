@@ -1,0 +1,29 @@
+name: ADR Guard
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adr-guard:
+    name: ADR Guard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Validate architecture decision records
+        uses: rodri-oliveira-dev/adr-guard@v1.10.0
+        with:
+          path: docs/adr
+          command: check

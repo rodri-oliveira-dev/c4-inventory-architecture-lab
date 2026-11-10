@@ -1,5 +1,7 @@
 # C4 Inventory Architecture Lab
 
+[![ADR Guard](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/adr-guard.yml/badge.svg)](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/adr-guard.yml)
+
 Um laboratório **didático e orientado à documentação** para aprender a comunicar a arquitetura de um sistema de gestão de estoque com os **quatro níveis do Modelo C4**, diagramas **Mermaid** e pequenos exemplos em **C#/.NET**.
 
 > **Objetivo:** demonstrar como a mesma solução pode ser apresentada, do contexto de negócio às classes de código, preservando consistência entre os níveis. **Não** se trata de um produto de estoque pronto para produção.
@@ -40,8 +42,8 @@ Essas escolhas são **hipóteses didáticas**, não recomendações universais. 
 3. **Nível 2:** contêineres.
 4. **Nível 3:** componentes internos da API.
 5. **Nível 4:** classes e exemplos ilustrativos em C#.
-6. **Fluxos e decisões:** sequência da movimentação e ADRs.
-7. **Qualidade e publicação:** validação de diagramas e links, revisão e preparação da versão 1.0.0.
+6. **Fluxos e decisões:** sequência da movimentação e aprofundamento dos ADRs iniciais.
+7. **Qualidade e publicação:** validação de diagramas e links, revisão e preparação da versão 1.0.0. A validação dos ADRs foi antecipada para a etapa 1.
 
 Os diagramas e exemplos serão incorporados **gradualmente**. A ausência deles na etapa inicial é intencional; não há links para documentos ainda não criados.
 
@@ -52,6 +54,17 @@ Os diagramas e exemplos serão incorporados **gradualmente**. A ausência deles 
 3. [Arquitetura de referência](docs/arquitetura-referencia.md)
 4. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
 5. [Registro inicial de decisões](docs/decisoes-arquiteturais.md)
+
+## Validação de decisões arquiteturais
+
+As decisões são registradas como [ADRs propostos](docs/decisoes-arquiteturais.md). Para instalar a versão fixada do **ADR Guard** e validar localmente (requer SDK .NET 10):
+
+```bash
+dotnet tool restore
+dotnet tool run adr-guard -- check docs/adr
+```
+
+O [GitHub Actions](.github/workflows/adr-guard.yml) executa a **Action oficial ADR Guard v1.10.0** em pull requests e na `main`, independentemente de quais arquivos mudaram.
 
 Para contribuir, consulte [CONTRIBUTING.md](CONTRIBUTING.md).
 

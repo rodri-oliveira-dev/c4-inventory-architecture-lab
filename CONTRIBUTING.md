@@ -16,9 +16,11 @@ Obrigado pelo interesse neste laboratório de documentação arquitetural.
 2. Crie uma branch a partir da `main` e faça mudanças pequenas e revisáveis.
 3. Descreva no PR a motivação, os documentos afetados e as verificações realizadas.
 4. Confira links relativos e a renderização dos blocos Mermaid no GitHub.
-5. Não inclua credenciais, dados reais de clientes ou código proprietário.
+5. Ao alterar uma decisão arquitetural, crie ou atualize um ADR em `docs/adr/` e mantenha [o catálogo](docs/decisoes-arquiteturais.md) coerente.
+6. Execute `dotnet tool restore` e `dotnet tool run adr-guard -- check docs/adr` antes de enviar o PR (requer SDK .NET 10).
+7. Não altere o status `Proposed` para `Accepted` sem aprovação humana e não inclua credenciais, dados reais ou código proprietário.
 
-A validação automatizada de diagramas será adicionada na etapa 7. Até lá, a conferência é manual.
+O GitHub Actions já valida os ADRs com ADR Guard. A validação automatizada de diagramas Mermaid será adicionada na etapa 7; até lá, confira sua renderização manualmente.
 
 ## Estilo
 

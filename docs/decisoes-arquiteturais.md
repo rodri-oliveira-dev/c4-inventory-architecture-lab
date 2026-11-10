@@ -1,31 +1,50 @@
-# Registro inicial de decisões arquiteturais
+# Decisões arquiteturais
 
-Este documento registra **premissas para o laboratório**, não ADRs formais nem evidências de uma implementação. Na etapa 6, decisões relevantes poderão ser convertidas em ADRs com contexto, alternativas e consequências.
+Este documento é o **índice comentado** das escolhas arquiteturais deste laboratório. Os arquivos individuais em [`docs/adr/`](adr/) seguem o formato **canonical** do [ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard) e são verificados automaticamente a cada pull request.
 
-| ID | Decisão de referência | Justificativa / consequência |
-| --- | --- | --- |
-| **D-01** | Monólito modular para o núcleo de estoque | Reduz complexidade operacional; permite demonstrar componentes bem delimitados dentro da API. |
-| **D-02** | ASP.NET Core e C# / .NET 10 | Aproxima o nível 4 de um ecossistema amplamente usado e permite exemplos curtos. |
-| **D-03** | PostgreSQL para persistência transacional | Mantém saldo, movimentação, idempotência e outbox na mesma fronteira transacional. |
-| **D-04** | Worker .NET separado da API | Ilustra um segundo contêiner executável e isola a entrega assíncrona de alertas. |
-| **D-05** | Outbox no banco, sem broker externo | Evita que a indisponibilidade do provedor impeça uma movimentação confirmada; exige controle de tentativas e duplicações. |
-| **D-06** | Concorrência protegida no banco | A validação apenas em memória não impede duas saídas simultâneas de consumirem o mesmo saldo. |
-| **D-07** | Idempotência de baixas originadas em vendas | Reenvio ou retry não podem repetir a movimentação. |
-| **D-08** | SPA sem framework front-end escolhido | O estudo trata arquitetura e responsabilidades, não comparação de frameworks de interface. |
-| **D-09** | Diagrama de classes no nível 4 | Mermaid não dispõe de sintaxe `C4Code`; usar `classDiagram` deixa a representação explícita. |
+> Todos os registros começam com status **Proposed**. São propostas que sustentam o desenho didático, **não** decisões aprovadas por uma equipe nem evidências de implementação. A aprovação requer revisão humana; o sucesso do ADR Guard significa apenas conformidade estrutural e de políticas documentais.
+
+## Catálogo de decisões
+
+| ID | ADR | Motivação e principal consequência | Status |
+| --- | --- | --- | --- |
+| D-01 | [ADR 0001 — Adotar um monólito modular para o núcleo de estoque](adr/0001-adotar-monolito-modular.md) | Organizar o núcleo de estoque em um único serviço modular, sem complexidade distribuída. | Proposed |
+| D-02 | [ADR 0002 — Usar ASP.NET Core, C# e .NET 10 na API de estoque](adr/0002-usar-aspnet-core-e-net-10.md) | Usar C#/.NET 10 nos exemplos para dar concretude às responsabilidades. | Proposed |
+| D-03 | [ADR 0003 — Adotar PostgreSQL como armazenamento transacional de estoque](adr/0003-adotar-postgresql-transacional.md) | Manter saldo, histórico, idempotência e outbox na mesma base transacional. | Proposed |
+| D-04 | [ADR 0004 — Separar o processamento de notificações em um worker](adr/0004-separar-worker-de-notificacoes.md) | Isolar o envio eventual de alertas da API transacional. | Proposed |
+| D-05 | [ADR 0005 — Adotar outbox transacional sem broker de mensagens](adr/0005-adotar-outbox-sem-broker.md) | Registrar intenções de notificação de maneira atômica, sem broker nesta versão. | Proposed |
+| D-06 | [ADR 0006 — Proteger o saldo de estoque contra atualizações concorrentes](adr/0006-proteger-concorrencia-no-saldo.md) | Impedir saídas concorrentes acima do saldo disponível. | Proposed |
+| D-07 | [ADR 0007 — Exigir idempotência em solicitações externas de baixa](adr/0007-exigir-idempotencia-em-baixas-externas.md) | Impedir que retries de vendas gerem movimentações duplicadas. | Proposed |
+| D-08 | [ADR 0008 — Adiar a escolha de framework da interface web](adr/0008-adiar-escolha-framework-da-interface.md) | Manter a UI independente de um framework específico. | Proposed |
+| D-09 | [ADR 0009 — Usar Mermaid classDiagram para o nível 4 do C4](adr/0009-usar-classdiagram-no-nivel-quatro.md) | Representar classes do nível 4 com Mermaid classDiagram, não C4Code. | Proposed |
 
 ## Alternativas intencionalmente não adotadas
 
-- **Microsserviços:** adicionariam descoberta, contratos distribuídos e consistência entre serviços sem melhorar o objetivo didático.
-- **Broker de mensagens:** poderia ser uma evolução, mas acrescentaria mais um contêiner e novas preocupações operacionais.
-- **Event sourcing:** desnecessário para representar histórico de movimentações e saldo transacional neste exemplo.
-- **Aplicação executável completa:** desviaria o foco da documentação arquitetural.
+- **Microsserviços:** introduziriam contratos e consistência distribuída sem benefício para o objetivo do laboratório ([ADR 0001](adr/0001-adotar-monolito-modular.md)).
+- **Broker de mensagens:** acrescentaria infraestrutura e processamento distribuído desnecessários para o exemplo ([ADR 0005](adr/0005-adotar-outbox-sem-broker.md)).
+- **Event sourcing:** não é requisito para manter movimentações auditáveis com saldo transacional; poderá ser discutido como alternativa futura.
+- **Aplicação executável completa:** desviaria o projeto da documentação arquitetural ([ADR 0002](adr/0002-usar-aspnet-core-e-net-10.md)).
+
+## Como validar com ADR Guard
+
+O projeto fixa a versão **1.10.0** da ferramenta como .NET local tool, em [`.config/dotnet-tools.json`](../.config/dotnet-tools.json), e utiliza a [Action oficial v1.10.0](../.github/workflows/adr-guard.yml) no CI.
+
+Com o SDK .NET 10 instalado, execute na raiz do repositório:
+
+```bash
+dotnet tool restore
+dotnet tool run adr-guard -- check docs/adr
+```
+
+Para criar um novo registro, use `dotnet tool run adr-guard -- new docs/adr --title "Título da decisão" --culture pt-BR`, edite o conteúdo e mantenha o status `Proposed` até aprovação explícita. Os cabeçalhos obrigatórios são `Status`, `Context`, `Decision` e `Consequences`, mesmo quando o texto é escrito em português.
+
+A validação do ADR Guard incide **sobre `docs/adr/`**, não sobre este quadro-resumo. O GitHub Actions executa `check` em todas as PRs para `main` e após merges; uma falha de validação fará o job falhar, mas é preciso configurar a proteção de branch para torná-lo obrigatório.
 
 ## Pontos para refinar nas próximas etapas
 
 - Contratos conceituais das integrações e semântica das respostas idempotentes.
-- Estratégia ilustrativa de concorrência: atualização condicional, bloqueio ou versão.
+- Estratégia ilustrativa de concorrência: atualização condicional, bloqueio ou versionamento.
 - Política de tentativas, falhas permanentes e duplicidade do worker.
-- Delimitação final das interfaces e classes mostradas no nível 4.
+- Delimitação final das interfaces e classes no nível 4.
 
-As decisões devem evoluir com os diagramas, sem gerar inconsistência com o [escopo](escopo-funcional.md) e a [arquitetura de referência](arquitetura-referencia.md).
+As mudanças devem ser refletidas nos ADRs e nos diagramas, preservando consistência com o [escopo](escopo-funcional.md) e a [arquitetura de referência](arquitetura-referencia.md).
