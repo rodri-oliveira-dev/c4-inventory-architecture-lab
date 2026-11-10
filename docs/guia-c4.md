@@ -36,7 +36,11 @@ Referências:
 
 O [diagrama do nível 1](01-contexto.md) utiliza `C4Context` com um único sistema central, duas pessoas e duas integrações externas. O [diagrama do nível 2](02-containers.md) amplia **o mesmo sistema** com quatro contêineres internos. O [diagrama do nível 3](03-componentes.md) abre **somente a API de Estoque** e revela seus componentes. O [nível 4](04-codigo.md) mostra um recorte de classes da operação `RegistrarSaida`. As descrições e tabelas que acompanham o Mermaid são parte da documentação: os diagramas não substituem contexto e justificativas arquiteturais.
 
-## 5. Formato dos documentos futuros
+## 5. Visão dinâmica complementar
+
+O [fluxo de movimentação](fluxo-movimentacao.md) utiliza `sequenceDiagram` para representar a **ordem das interações**, distinguindo o commit da saída e o envio posterior da notificação. Esse fluxo **não é um quinto nível do C4**: é um diagrama dinâmico complementar às quatro visões estáticas.
+
+## 6. Formato dos documentos futuros
 
 Cada capítulo de nível deverá conter:
 
@@ -47,7 +51,7 @@ Cada capítulo de nível deverá conter:
 - Conexão com o capítulo anterior e com o próximo.
 - Limitações: o que o diagrama deliberadamente omite.
 
-## 6. Fonte de verdade e versionamento
+## 7. Fonte de verdade e versionamento
 
 Os **blocos Mermaid nos capítulos Markdown** serão a fonte editável e renderizável no GitHub. Se forem necessários arquivos `.mmd` independentes em `diagrams/`, eles devem ser extraídos desses blocos, para evitar divergência entre duas cópias mantidas manualmente. A extração e a validação ficarão para a etapa 7.
 

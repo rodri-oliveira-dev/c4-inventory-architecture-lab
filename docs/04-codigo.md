@@ -141,7 +141,7 @@ No nível 4, a leitura do **contrato e suas invariantes** importa mais que a qua
 
 ## Próxima etapa
 
-A **etapa 6** adicionará o fluxo de movimentação como diagrama de sequência ou C4 dinâmico, distinguindo claramente **transação síncrona**, **confirmação ao solicitante** e **envio eventual de notificações**, além de aprofundar os ADRs pertinentes.
+O [fluxo de movimentação](fluxo-movimentacao.md) (etapa 6) apresenta as interações em sequência, distinguindo **transação síncrona**, **confirmação ao solicitante** e **envio eventual de notificações**, com cenários de falha e ADRs aprofundados.
 
 **Voltar:** [nível 3: Componentes](03-componentes.md) · [nível 2: Contêineres](02-containers.md) · [nível 1: Contexto](01-contexto.md) · [índice da documentação](README.md).
 

@@ -9,4 +9,4 @@ Os exemplos da **etapa 5** apoiam o [nível 4 (Code)](../docs/04-codigo.md), sem
 
 **Convenções:** os blocos `csharp` são ilustrações, **não foram compilados nem executados**; o SQL é **esquemático**, não uma migration ou um script de produção. Não há implementação do adaptador, endpoint, worker ou testes automatizados.
 
-O cenário permanece a saída de **10 unidades** do `SKU-001`, com saldo inicial **15**, limite mínimo **5** e saldo final **5**. Consulte o [escopo funcional](../docs/escopo-funcional.md), os [ADRs](../docs/decisoes-arquiteturais.md) e a [arquitetura de referência](../docs/arquitetura-referencia.md).
+Os [diagramas de sequência](../docs/fluxo-movimentacao.md) mostram essas responsabilidades em execução. O cenário permanece a saída de **10 unidades** do `SKU-001`, com saldo inicial **15**, limite mínimo **5** e saldo final **5**. Consulte o [escopo funcional](../docs/escopo-funcional.md), os [ADRs](../docs/decisoes-arquiteturais.md) e a [arquitetura de referência](../docs/arquitetura-referencia.md).

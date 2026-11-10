@@ -18,6 +18,10 @@ Este documento é o **índice comentado** das escolhas arquiteturais deste labor
 | D-08 | [ADR 0008 — Adiar a escolha de framework da interface web](adr/0008-adiar-escolha-framework-da-interface.md) | Manter a UI independente de um framework específico. | Proposed |
 | D-09 | [ADR 0009 — Usar Mermaid classDiagram para o nível 4 do C4](adr/0009-usar-classdiagram-no-nivel-quatro.md) | Representar classes do nível 4 com Mermaid classDiagram, não C4Code. | Proposed |
 
+## Decisões aplicadas ao fluxo da etapa 6
+
+O [diagrama de sequência da movimentação](fluxo-movimentacao.md) relaciona a confirmação transacional e a entrega eventual aos ADRs **0003 a 0007**, aprofundados nesta etapa com direcionadores, alternativas e riscos operacionais. Todos permanecem **Proposed** e exigem revisão humana para qualquer mudança de status.
+
 ## Alternativas intencionalmente não adotadas
 
 - **Microsserviços:** introduziriam contratos e consistência distribuída sem benefício para o objetivo do laboratório ([ADR 0001](adr/0001-adotar-monolito-modular.md)).
@@ -42,9 +46,9 @@ A validação do ADR Guard incide **sobre `docs/adr/`**, não sobre este quadro-
 
 ## Pontos para refinar nas próximas etapas
 
-- Contratos conceituais das integrações e semântica das respostas idempotentes.
-- Estratégia ilustrativa de concorrência: atualização condicional, bloqueio ou versionamento.
-- Política de tentativas, falhas permanentes e duplicidade do worker.
-- Delimitação final das interfaces e classes no nível 4.
+- Contrato do provedor de notificações e deduplicação quando suportada.
+- Retenção de chaves e política para operações rejeitadas.
+- Política de reivindicação da outbox, tentativas, falhas permanentes e observabilidade.
+- Testes de integração de concorrência e falhas numa eventual implementação.
 
 As mudanças devem ser refletidas nos ADRs e nos diagramas, preservando consistência com o [escopo](escopo-funcional.md) e a [arquitetura de referência](arquitetura-referencia.md).
