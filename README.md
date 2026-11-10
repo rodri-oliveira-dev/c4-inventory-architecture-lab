@@ -21,7 +21,7 @@ Consulte o [escopo funcional](docs/escopo-funcional.md) e a [arquitetura de refe
 | **1. System Context** | Quem utiliza o sistema e com quais sistemas ele interage? | [C4Context: ver diagrama](docs/01-contexto.md) |
 | **2. Containers** | Quais aplicações e armazenamentos compõem a solução? | [C4Container: ver diagrama](docs/02-containers.md) |
 | **3. Components** | Como a API é organizada internamente? | [C4Component: ver diagrama](docs/03-componentes.md) |
-| **4. Code** | Como as responsabilidades aparecem nas classes C#? | `classDiagram` |
+| **4. Code** | Como as responsabilidades aparecem nas classes C#? | [classDiagram: ver diagrama](docs/04-codigo.md) |
 
 O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiros níveis. Para o quarto nível, usamos um **diagrama de classes**, não uma sintaxe `C4Code` inexistente. Saiba mais no [guia de modelagem](docs/guia-c4.md).
 
@@ -41,22 +41,24 @@ Essas escolhas são **hipóteses didáticas**, não recomendações universais. 
 2. **Nível 1:** [contexto do sistema](docs/01-contexto.md) (disponível).
 3. **Nível 2:** [contêineres do sistema](docs/02-containers.md) (disponível).
 4. **Nível 3:** [componentes internos da API](docs/03-componentes.md) (disponível).
-5. **Nível 4:** classes e exemplos ilustrativos em C#.
+5. **Nível 4:** [classes e exemplos ilustrativos em C#](docs/04-codigo.md) (disponível).
 6. **Fluxos e decisões:** sequência da movimentação e aprofundamento dos ADRs iniciais.
 7. **Qualidade e publicação:** validação de diagramas e links, revisão e preparação da versão 1.0.0. A validação dos ADRs foi antecipada para a etapa 1.
 
-Os diagramas dos [níveis 1 (Contexto)](docs/01-contexto.md), [2 (Contêineres)](docs/02-containers.md) e [3 (Componentes)](docs/03-componentes.md) estão disponíveis em Mermaid. O nível 4 e os fluxos complementares serão incorporados nas próximas etapas.
+Os quatro níveis já estão documentados: [Contexto](docs/01-contexto.md), [Contêineres](docs/02-containers.md), [Componentes](docs/03-componentes.md) e [Código](docs/04-codigo.md). O nível 4 utiliza o `classDiagram` do Mermaid e pequenos [exemplos C#](examples/registrar-saida.md). Fluxos complementares e validação automatizada de diagramas permanecem nas etapas seguintes.
 
 ## Comece por aqui
 
 1. [Nível 1: Contexto do Sistema de Gestão de Estoque](docs/01-contexto.md)
 2. [Nível 2: Contêineres do Sistema de Gestão de Estoque](docs/02-containers.md)
 3. [Nível 3: Componentes da API de Estoque](docs/03-componentes.md)
-4. [Índice da documentação](docs/README.md)
-5. [Escopo e regras de negócio](docs/escopo-funcional.md)
-6. [Arquitetura de referência](docs/arquitetura-referencia.md)
-7. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
-8. [Decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md)
+4. [Nível 4: Código do caso de uso RegistrarSaida](docs/04-codigo.md)
+5. [Exemplos C# e persistência](examples/README.md)
+6. [Índice da documentação](docs/README.md)
+7. [Escopo e regras de negócio](docs/escopo-funcional.md)
+8. [Arquitetura de referência](docs/arquitetura-referencia.md)
+9. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
+10. [Decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md)
 
 ## Validação de decisões arquiteturais
 

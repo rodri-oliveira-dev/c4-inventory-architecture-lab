@@ -4,7 +4,7 @@
 
 Esta é uma **arquitetura hipotética para ensino do C4**, não a descrição de um serviço implementado. Escolhemos poucos elementos e um único caso de uso para manter os quatro níveis coerentes.
 
-**Sistema sob análise:** Sistema de Gestão de Estoque. Consulte os diagramas [nível 1: Contexto](01-contexto.md), [nível 2: Contêineres](02-containers.md) e [nível 3: Componentes da API](03-componentes.md).
+**Sistema sob análise:** Sistema de Gestão de Estoque. Consulte os diagramas [nível 1: Contexto](01-contexto.md), [nível 2: Contêineres](02-containers.md), [nível 3: Componentes da API](03-componentes.md) e [nível 4: Código](04-codigo.md).
 
 ## 2. Contêineres previstos
 
@@ -43,7 +43,7 @@ O [diagrama de componentes da API](03-componentes.md) apresenta Endpoints HTTP, 
 | **ReferenciaDeOrigem** | Chave que permite deduplicar solicitações externas. |
 | **NotificacaoPendente** | Item da outbox para processamento assíncrono. |
 
-Os nomes das classes e das interfaces serão refinados na etapa 5. Esses conceitos **não implicam** que um único agregado mantenha todo o histórico de movimentações em memória; os registros podem ser persistidos separadamente na mesma transação.
+O [nível 4](04-codigo.md) detalha um recorte de classes da saída de estoque, incluindo `RegistrarSaidaUseCase`, `EstoqueDoProduto` e `IRegistroSaidaTransacional`. Esses conceitos **não implicam** que um agregado mantenha todo o histórico de movimentações em memória; os registros podem ser persistidos separadamente na mesma transação.
 
 ## 5. Fluxo principal: baixa de 10 unidades
 

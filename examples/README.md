@@ -1,12 +1,12 @@
 # Exemplos ilustrativos em C#
 
-Os exemplos desta pasta serão adicionados na **etapa 5**, vinculados ao diagrama de classes do nível 4.
+Os exemplos da **etapa 5** apoiam o [nível 4 (Code)](../docs/04-codigo.md), sem criar um projeto ou uma aplicação executável.
 
-**Escopo proposto:** classes e interfaces suficientes para ilustrar uma saída de estoque de 10 unidades, suas validações, a persistência transacional e a proteção do saldo contra concorrência.
+| Exemplo | Objetivo |
+| --- | --- |
+| [`RegistrarSaida` em C#](registrar-saida.md) | Mostrar a porta transacional, o caso de uso, o objeto de domínio, o plano e o resultado de uma saída. |
+| [Persistência transacional](persistencia-transacional.md) | Explicar bloqueio, idempotência, atomicidade e outbox com roteiro e SQL ilustrativos. |
 
-- Preferir exemplos pequenos, conceitualmente consistentes com o domínio e com o diagrama.
-- Explicitar o que é pseudocódigo, contrato conceitual ou código C# compilável.
-- Não sugerir que o exemplo é um produto pronto para produção.
-- Não criar aplicação web, banco de dados ou infraestrutura executável apenas para demonstrar o modelo.
+**Convenções:** os blocos `csharp` são ilustrações, **não foram compilados nem executados**; o SQL é **esquemático**, não uma migration ou um script de produção. Não há implementação do adaptador, endpoint, worker ou testes automatizados.
 
-Leia o [escopo funcional](../docs/escopo-funcional.md) e a [arquitetura de referência](../docs/arquitetura-referencia.md).
+O cenário permanece a saída de **10 unidades** do `SKU-001`, com saldo inicial **15**, limite mínimo **5** e saldo final **5**. Consulte o [escopo funcional](../docs/escopo-funcional.md), os [ADRs](../docs/decisoes-arquiteturais.md) e a [arquitetura de referência](../docs/arquitetura-referencia.md).
