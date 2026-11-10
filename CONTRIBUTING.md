@@ -21,7 +21,7 @@ Obrigado pelo interesse neste laboratório de documentação arquitetural.
 7. Execute também `python3 -m unittest discover -s tests -v` e `python3 scripts/validate_docs.py --output-dir .tmp/mermaid` (Python 3.12+).
 8. Não altere o status `Proposed` para `Accepted` sem aprovação humana e não inclua credenciais, dados reais ou código proprietário.
 
-O GitHub Actions valida ADRs com ADR Guard e documentação com [Documentation Quality](.github/workflows/docs-quality.yml). O segundo job confere os links locais e renderiza Mermaid usando a CLI; a inspeção visual no GitHub continua importante.
+O GitHub Actions valida ADRs com ADR Guard e documentação com [Documentation Quality](.github/workflows/docs-quality.yml). O [Dependabot](.github/dependabot.yml) propõe atualizações de GitHub Actions e do Mermaid CLI declarado no [package.json](package.json). O segundo job confere os links locais e renderiza Mermaid usando a CLI; a inspeção visual no GitHub continua importante.
 
 ## Estilo
 

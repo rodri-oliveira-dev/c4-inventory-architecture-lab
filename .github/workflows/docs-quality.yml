@@ -36,11 +36,8 @@ jobs:
       - name: Validate links and extract Mermaid blocks
         run: python3 scripts/validate_docs.py --output-dir "$RUNNER_TEMP/mermaid"
 
-      - name: Install pinned Mermaid CLI
-        run: |
-          npm install --prefix "$RUNNER_TEMP/mermaid-cli" \
-            --no-save --no-package-lock --no-audit --no-fund \
-            @mermaid-js/mermaid-cli@11.17.1
+      - name: Install Mermaid CLI from package.json
+        run: npm install --no-save --no-package-lock --no-audit --no-fund
 
       - name: Render every Mermaid diagram
         shell: bash
@@ -53,7 +50,7 @@ jobs:
           count=0
           while IFS= read -r -d '' source; do
             target="${source%.mmd}.svg"
-            "$RUNNER_TEMP/mermaid-cli/node_modules/.bin/mmdc" \
+            "./node_modules/.bin/mmdc" \
               -p "$RUNNER_TEMP/puppeteer-config.json" \
               -i "$source" -o "$target"
             test -s "$target"

@@ -13,7 +13,7 @@ A `v1.0.0` é a **primeira publicação documental planejada** do C4 Inventory A
 ## Critérios antes de publicar
 
 1. Integrar o PR da etapa 7 na `main` **somente após revisão**.
-2. Confirmar as verificações **ADR Guard** e **Documentation Quality / Mermaid and Markdown links** com resultado verde no commit final da `main`.
+2. Confirmar as verificações **ADR Guard** e **Documentation Quality / Mermaid and Markdown links** com resultado verde no commit final da `main`. Conferir também atualizações pendentes de GitHub Actions e Mermaid CLI propostas pelo [Dependabot](../.github/dependabot.yml).
 3. Abrir o artefato **`mermaid-diagram-previews`** da última execução de Documentation Quality. Verificar legibilidade e conteúdo dos **6 SVGs** gerados; a sintaxe renderizada não substitui revisão editorial.
 4. Conferir no GitHub os quatro diagramas dos [níveis 1 a 4](README.md) e os [dois diagramas de sequência](fluxo-movimentacao.md).
 5. Revisar o [escopo funcional](escopo-funcional.md) e a correspondência com as responsabilidades, relações e interfaces entre níveis.

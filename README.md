@@ -76,7 +76,7 @@ O [GitHub Actions](.github/workflows/adr-guard.yml) executa a **Action oficial A
 
 ## Qualidade da documentação
 
-O workflow [Documentation Quality](.github/workflows/docs-quality.yml) roda em todo pull request para `main`, pushes para `main` e manualmente. Ele verifica links e âncoras Markdown locais, extrai os blocos Mermaid dos capítulos e tenta renderizá-los com **Mermaid CLI 11.17.1**, sem manter cópias `.mmd` no Git. Os SVGs gerados ficam disponíveis como artefatos do workflow.
+O workflow [Documentation Quality](.github/workflows/docs-quality.yml) roda em todo pull request para `main`, pushes para `main` e manualmente. Ele verifica links e âncoras Markdown locais, extrai os blocos Mermaid dos capítulos e tenta renderizá-los com **Mermaid CLI 11.17.1**, sem manter cópias `.mmd` no Git. Os SVGs gerados ficam disponíveis como artefatos do workflow. A versão do Mermaid CLI é declarada em [`package.json`](package.json) e instalada pelo CI a partir desse manifesto, permitindo atualizações propostas pelo Dependabot.
 
 Verificação local (Python 3.12+):
 
@@ -86,6 +86,15 @@ python3 scripts/validate_docs.py --output-dir .tmp/mermaid
 ```
 
 O comando Python verifica links e a estrutura dos blocos. Para comprovar **renderização**, execute também o Mermaid CLI `11.17.1` sobre cada `.mmd` extraído, como no workflow. Links externos não são consultados via HTTP no CI para evitar instabilidade de rede e limites de requisição.
+
+## Atualizações de dependências
+
+O [Dependabot](.github/dependabot.yml) verifica semanalmente:
+
+- **GitHub Actions** nos workflows, incluindo ações oficiais e a ação ADR Guard.
+- **npm** no `package.json` da raiz, utilizado para instalar `@mermaid-js/mermaid-cli` no workflow de documentação.
+
+As atualizações `minor` e `patch` são agrupadas, enquanto mudanças `major` recebem PRs próprios e precisam passar pelo CI antes de merge. O manifesto local [`.config/dotnet-tools.json`](.config/dotnet-tools.json) contém o ADR Guard da CLI, cuja versão deve ser conferida manualmente: este repositório não contém um projeto .NET para o Dependabot NuGet atualizar. Não há dependências Python de terceiros ou uma imagem Docker neste laboratório.
 
 Para contribuir, consulte [CONTRIBUTING.md](CONTRIBUTING.md). Para publicar, consulte o [checklist de v1.0.0](docs/publicacao.md).
 
