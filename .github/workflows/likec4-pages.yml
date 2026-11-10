@@ -1,0 +1,89 @@
+name: LikeC4 Site
+
+on:
+  # PRs always get the build check, including documentation-only changes.
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - 'likec4/**'
+      - 'package.json'
+      - '.github/workflows/likec4-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: likec4-pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build LikeC4 site
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install pinned documentation dependencies
+        run: npm install --no-save --no-package-lock --no-audit --no-fund
+
+      - name: Validate LikeC4 model
+        run: npm run likec4:validate
+
+      - name: Build static website
+        run: npm run likec4:build:pages
+
+      - name: Verify GitHub Pages output
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/index.html
+          test -d dist/assets
+          test "$(find dist/assets -type f | wc -l)" -gt 0
+          grep -Fq '/c4-inventory-architecture-lab/' dist/index.html
+          echo "LikeC4 build generated an entry point and assets for the repository Pages path." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload downloadable site preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: likec4-site-preview
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Configure GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist/
+
+  deploy:
+    name: Deploy LikeC4 site
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

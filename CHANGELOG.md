@@ -4,6 +4,13 @@ Este repositório é um laboratório de arquitetura **orientado à documentaçã
 
 ## Unreleased
 
+### LikeC4: trilha complementar
+
+- Modelo arquitetural compartilhado com três visões estruturais e duas dinâmicas.
+- Geração de site interativo estático por LikeC4, com base path correto para GitHub Pages e navegação por hash.
+- Workflow que valida e compila o site em PRs e publica após alterações na `main`.
+- Guia comparativo de Mermaid e LikeC4, sem substituir o nível 4 em UML de classes.
+
 A versão **v1.0.0** está preparada para publicação **após** a integração do PR da etapa 7 e a aprovação das verificações automatizadas. **Nenhuma tag ou release é criada automaticamente**.
 
 ### Funcionalidades de documentação planejadas para v1.0.0

@@ -2,7 +2,7 @@
 
 Este diretório inicia uma **segunda representação do mesmo sistema** descrito nos quatro níveis [Mermaid](../docs/README.md). Aqui, o LikeC4 modela **elementos e relações uma única vez** e constrói visualizações derivadas, sem criar novos serviços de software ou outra arquitetura.
 
-**Estado atual:** etapa **4 de 5** da trilha LikeC4. As três visões estruturais de [Contexto, Contêineres](visoes-contexto-conteineres.md) e [Componentes da API](visao-componentes.md) agora convivem com dois [fluxos dinâmicos em sequência](fluxos-dinamicos.md). O nível 4 (Code) e os diagramas de sequência originais permanecem em Mermaid; LikeC4 **não gera automaticamente** os capítulos Mermaid nesta fase.
+**Estado atual:** etapa **5 de 5** da trilha LikeC4. As três visões estruturais de [Contexto, Contêineres](visoes-contexto-conteineres.md) e [Componentes da API](visao-componentes.md) convivem com dois [fluxos dinâmicos em sequência](fluxos-dinamicos.md). O [site interativo LikeC4](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/) é preparado pelo workflow de Pages; estará disponível quando o deploy da `main` for confirmado. O nível 4 (Code) e os diagramas de sequência originais permanecem em Mermaid; LikeC4 **não gera automaticamente** os capítulos Mermaid.
 
 ## Estrutura
 
@@ -16,6 +16,7 @@ Este diretório inicia uma **segunda representação do mesmo sistema** descrito
 | [**Contexto e Contêineres**](visoes-contexto-conteineres.md) | Guia das duas primeiras visões e suas fronteiras. |
 | [**Componentes da API**](visao-componentes.md) | Zoom no contêiner API, cinco componentes, dependências e comparação com Mermaid. |
 | [**Fluxos dinâmicos**](fluxos-dinamicos.md) | Confirmação síncrona da baixa e envio eventual do alerta, com comparativo Mermaid/LikeC4. |
+| [**Comparação e publicação**](../docs/likec4-vs-mermaid.md) | Compara as duas abordagens e documenta GitHub Pages, build e CI. |
 
 ## Tecnologias e requisitos
 
@@ -29,11 +30,12 @@ Na raiz do repositório:
 npm install
 npm run likec4:validate
 npm run likec4:dev
+npm run likec4:build:pages
 ```
 
 O comando `likec4:dev` inicia uma prévia interativa local (porta padrão 5173). O comando `likec4:validate` verifica o modelo de referência. Para formatar os arquivos `.c4`, use `npm run likec4:format`.
 
-O workflow [Documentation Quality](../.github/workflows/docs-quality.yml) executa a validação do modelo LikeC4 após instalar as dependências npm. A exportação e publicação automatizadas das visões pertencem à etapa 5.
+O workflow [Documentation Quality](../.github/workflows/docs-quality.yml) valida o modelo LikeC4 após instalar as dependências npm. O novo [LikeC4 Site](../.github/workflows/likec4-pages.yml) compila o site em PRs e, após merge na `main`, publica a versão estática no GitHub Pages. A [comparação Mermaid vs. LikeC4](../docs/likec4-vs-mermaid.md) explica publicação, limites e configuração de Pages.
 
 ## As três visões disponíveis
 
@@ -75,7 +77,7 @@ O cenário de referência continua sendo a saída de **10 unidades** de `SKU-001
 2. **Contexto e Contêineres (concluída):** visões de níveis 1 e 2 com as mesmas fronteiras do Mermaid.
 3. **Componentes e Código (concluída):** aprofundar a API nos cinco componentes; manter o diagrama UML de classes em Mermaid.
 4. **Fluxos dinâmicos (concluída nesta branch):** modelar baixa síncrona e processamento eventual da outbox como visões de sequência LikeC4.
-5. **CI/CD e publicação:** exportar, validar e disponibilizar as visões, atualizar índices e comparar ambas as representações.
+5. **CI/CD e publicação (concluída nesta branch):** validar, compilar e publicar o site interativo no GitHub Pages, atualizar índices e comparar ambas as representações. O deploy depende do merge na `main` e da fonte Pages = GitHub Actions.
 
 **Orientação editorial:** ao alterar um componente ou relacionamento em uma das representações, revisar a outra no mesmo PR para não manter duas arquiteturas contraditórias. A eventual geração automática das representações será avaliada no encerramento da trilha.
 
