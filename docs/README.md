@@ -1,6 +1,6 @@
 # Documentação
 
-Este índice orienta a leitura do laboratório. Os diagramas dos quatro níveis serão criados em PRs posteriores; esta etapa estabelece o vocabulário, as responsabilidades e as regras que eles deverão respeitar.
+Este índice orienta a leitura do laboratório. O **nível 1** já está disponível em Mermaid; os níveis 2 a 4 e os fluxos complementares serão documentados progressivamente.
 
 ## Fundação (etapa 1)
 
@@ -12,9 +12,11 @@ Este índice orienta a leitura do laboratório. Os diagramas dos quatro níveis 
 | [Decisões arquiteturais](decisoes-arquiteturais.md) | Catálogo de ADRs propostos, trade-offs, instalação e validação com ADR Guard |
 | [Registros ADR](adr/0001-adotar-monolito-modular.md) | ADRs individuais 0001 a 0009 validados automaticamente |
 
-## Próximos documentos
+## C4: diagramas por nível
 
-- **Etapa 2:** `docs/01-contexto.md` — visão de contexto (nível 1).
+- **Etapa 2 (disponível):** [Nível 1: Contexto do sistema](01-contexto.md) — atores, integrações e fronteira do sistema.
+
+## Próximos documentos
 - **Etapa 3:** `docs/02-containers.md` — aplicações e bancos (nível 2).
 - **Etapa 4:** `docs/03-componentes.md` — interior da API (nível 3).
 - **Etapa 5:** `docs/04-codigo.md` — classes e relações (nível 4).

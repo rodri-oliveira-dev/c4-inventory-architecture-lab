@@ -8,7 +8,7 @@ Mostrar a mesma arquitetura com diferentes níveis de abstração, sem confundir
 
 | Nível | Mermaid | Escopo |
 | --- | --- | --- |
-| 1 | `C4Context` | Operador, gestor, sistema de estoque e sistemas externos |
+| 1 | [`C4Context`](01-contexto.md) | Operador, gestor, sistema de estoque e sistemas externos |
 | 2 | `C4Container` | Web, API, worker, PostgreSQL e sistemas externos |
 | 3 | `C4Component` | Componentes **da API**, dentro do contêiner escolhido |
 | 4 | `classDiagram` | Recorte das classes C# do caso de uso de saída |
@@ -32,7 +32,11 @@ Referências:
 7. **Cenário constante:** manter a movimentação de 10 unidades como fio condutor.
 8. **Não exagerar a arquitetura:** não incluir broker, cache, gateway ou microsserviços sem necessidade explícita.
 
-## 4. Formato dos documentos futuros
+## 4. Exemplo disponível
+
+O [diagrama do nível 1](01-contexto.md) utiliza `C4Context` com um único sistema central, duas pessoas e duas integrações externas. Sua descrição e as tabelas que acompanham o Mermaid são parte da documentação: o diagrama sozinho não substitui o contexto da decisão arquitetural.
+
+## 5. Formato dos documentos futuros
 
 Cada capítulo de nível deverá conter:
 
@@ -43,7 +47,7 @@ Cada capítulo de nível deverá conter:
 - Conexão com o capítulo anterior e com o próximo.
 - Limitações: o que o diagrama deliberadamente omite.
 
-## 5. Fonte de verdade e versionamento
+## 6. Fonte de verdade e versionamento
 
 Os **blocos Mermaid nos capítulos Markdown** serão a fonte editável e renderizável no GitHub. Se forem necessários arquivos `.mmd` independentes em `diagrams/`, eles devem ser extraídos desses blocos, para evitar divergência entre duas cópias mantidas manualmente. A extração e a validação ficarão para a etapa 7.
 
