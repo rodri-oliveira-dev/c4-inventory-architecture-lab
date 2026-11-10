@@ -15,12 +15,13 @@ Obrigado pelo interesse neste laboratório de documentação arquitetural.
 1. Abra uma issue para propor ajustes de escopo ou arquitetura.
 2. Crie uma branch a partir da `main` e faça mudanças pequenas e revisáveis.
 3. Descreva no PR a motivação, os documentos afetados e as verificações realizadas.
-4. Confira links relativos e a renderização dos blocos Mermaid no GitHub.
+4. Confira links relativos e a renderização dos blocos Mermaid no GitHub; o workflow de documentação verifica automaticamente links e renderização.
 5. Ao alterar uma decisão arquitetural, crie ou atualize um ADR em `docs/adr/` e mantenha [o catálogo](docs/decisoes-arquiteturais.md) coerente.
 6. Execute `dotnet tool restore` e `dotnet tool run adr-guard -- check docs/adr` antes de enviar o PR (requer SDK .NET 10).
-7. Não altere o status `Proposed` para `Accepted` sem aprovação humana e não inclua credenciais, dados reais ou código proprietário.
+7. Execute também `python3 -m unittest discover -s tests -v` e `python3 scripts/validate_docs.py --output-dir .tmp/mermaid` (Python 3.12+).
+8. Não altere o status `Proposed` para `Accepted` sem aprovação humana e não inclua credenciais, dados reais ou código proprietário.
 
-O GitHub Actions já valida os ADRs com ADR Guard. A validação automatizada de diagramas Mermaid será adicionada na etapa 7; até lá, confira sua renderização manualmente.
+O GitHub Actions valida ADRs com ADR Guard e documentação com [Documentation Quality](.github/workflows/docs-quality.yml). O [Dependabot](.github/dependabot.yml) propõe atualizações de GitHub Actions e do Mermaid CLI declarado no [package.json](package.json). O segundo job confere os links locais e renderiza Mermaid usando a CLI; a inspeção visual no GitHub continua importante.
 
 ## Estilo
 

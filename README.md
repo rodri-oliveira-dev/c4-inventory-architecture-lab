@@ -1,6 +1,7 @@
 # C4 Inventory Architecture Lab
 
 [![ADR Guard](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/adr-guard.yml/badge.svg)](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/adr-guard.yml)
+[![Documentation Quality](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/docs-quality.yml/badge.svg)](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/docs-quality.yml)
 
 Um laboratório **didático e orientado à documentação** para aprender a comunicar a arquitetura de um sistema de gestão de estoque com os **quatro níveis do Modelo C4**, diagramas **Mermaid** e pequenos exemplos em **C#/.NET**.
 
@@ -43,9 +44,9 @@ Essas escolhas são **hipóteses didáticas**, não recomendações universais. 
 4. **Nível 3:** [componentes internos da API](docs/03-componentes.md) (disponível).
 5. **Nível 4:** [classes e exemplos ilustrativos em C#](docs/04-codigo.md) (disponível).
 6. **Fluxos e decisões:** [sequência da movimentação](docs/fluxo-movimentacao.md) e aprofundamento dos ADRs 0003 a 0007 (disponível).
-7. **Qualidade e publicação:** validação de diagramas e links, revisão e preparação da versão 1.0.0. A validação dos ADRs foi antecipada para a etapa 1.
+7. **Qualidade e publicação:** [validação automática de Mermaid e links](.github/workflows/docs-quality.yml), revisão e [preparação da v1.0.0](docs/publicacao.md) (disponível).
 
-Os quatro níveis já estão documentados: [Contexto](docs/01-contexto.md), [Contêineres](docs/02-containers.md), [Componentes](docs/03-componentes.md) e [Código](docs/04-codigo.md). O nível 4 utiliza `classDiagram` e pequenos [exemplos C#](examples/registrar-saida.md). O [fluxo de movimentação](docs/fluxo-movimentacao.md) ilustra a confirmação transacional e a entrega eventual. A validação automatizada dos diagramas está prevista para a etapa 7.
+Os quatro níveis já estão documentados: [Contexto](docs/01-contexto.md), [Contêineres](docs/02-containers.md), [Componentes](docs/03-componentes.md) e [Código](docs/04-codigo.md). O nível 4 utiliza `classDiagram` e pequenos [exemplos C#](examples/registrar-saida.md). O [fluxo de movimentação](docs/fluxo-movimentacao.md) ilustra a confirmação transacional e a entrega eventual. A validação de diagramas e links Markdown está configurada na etapa 7.
 
 ## Comece por aqui
 
@@ -60,6 +61,7 @@ Os quatro níveis já estão documentados: [Contexto](docs/01-contexto.md), [Con
 9. [Arquitetura de referência](docs/arquitetura-referencia.md)
 10. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
 11. [Decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md)
+12. [Preparação da release v1.0.0](docs/publicacao.md)
 
 ## Validação de decisões arquiteturais
 
@@ -72,7 +74,29 @@ dotnet tool run adr-guard -- check docs/adr
 
 O [GitHub Actions](.github/workflows/adr-guard.yml) executa a **Action oficial ADR Guard v1.10.0** em pull requests e na `main`, independentemente de quais arquivos mudaram.
 
-Para contribuir, consulte [CONTRIBUTING.md](CONTRIBUTING.md).
+## Qualidade da documentação
+
+O workflow [Documentation Quality](.github/workflows/docs-quality.yml) roda em todo pull request para `main`, pushes para `main` e manualmente. Ele verifica links e âncoras Markdown locais, extrai os blocos Mermaid dos capítulos e tenta renderizá-los com **Mermaid CLI 11.17.1**, sem manter cópias `.mmd` no Git. Os SVGs gerados ficam disponíveis como artefatos do workflow. A versão do Mermaid CLI é declarada em [`package.json`](package.json) e instalada pelo CI a partir desse manifesto, permitindo atualizações propostas pelo Dependabot.
+
+Verificação local (Python 3.12+):
+
+```bash
+python3 -m unittest discover -s tests -v
+python3 scripts/validate_docs.py --output-dir .tmp/mermaid
+```
+
+O comando Python verifica links e a estrutura dos blocos. Para comprovar **renderização**, execute também o Mermaid CLI `11.17.1` sobre cada `.mmd` extraído, como no workflow. Links externos não são consultados via HTTP no CI para evitar instabilidade de rede e limites de requisição.
+
+## Atualizações de dependências
+
+O [Dependabot](.github/dependabot.yml) verifica semanalmente:
+
+- **GitHub Actions** nos workflows, incluindo ações oficiais e a ação ADR Guard.
+- **npm** no `package.json` da raiz, utilizado para instalar `@mermaid-js/mermaid-cli` no workflow de documentação.
+
+As atualizações `minor` e `patch` são agrupadas, enquanto mudanças `major` recebem PRs próprios e precisam passar pelo CI antes de merge. O manifesto local [`.config/dotnet-tools.json`](.config/dotnet-tools.json) contém o ADR Guard da CLI, cuja versão deve ser conferida manualmente: este repositório não contém um projeto .NET para o Dependabot NuGet atualizar. Não há dependências Python de terceiros ou uma imagem Docker neste laboratório.
+
+Para contribuir, consulte [CONTRIBUTING.md](CONTRIBUTING.md). Para publicar, consulte o [checklist de v1.0.0](docs/publicacao.md).
 
 ## Licença
 

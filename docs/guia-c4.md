@@ -13,7 +13,7 @@ Mostrar a mesma arquitetura com diferentes níveis de abstração, sem confundir
 | 3 | [`C4Component`](03-componentes.md) | Componentes **da API**, dentro do contêiner escolhido |
 | 4 | [`classDiagram`](04-codigo.md) | Recorte das classes C# do caso de uso de saída |
 
-**Atenção:** o suporte do Mermaid a C4 é experimental e a apresentação pode variar conforme a versão e o renderizador. `classDiagram` representa o nível de código neste laboratório, mas não é uma sintaxe C4 específica. A validação automatizada e a escolha da versão do renderizador serão abordadas na etapa 7.
+**Atenção:** o suporte do Mermaid a C4 é experimental e a apresentação pode variar conforme a versão e o renderizador. `classDiagram` representa o nível de código neste laboratório, mas não é uma sintaxe C4 específica. O workflow [Documentation Quality](../.github/workflows/docs-quality.yml) fixa a versão **11.17.1** do Mermaid CLI e renderiza os seis diagramas como uma verificação de sintaxe. O GitHub pode usar outra versão do renderizador, portanto a conferência visual no PR continua recomendada.
 
 Referências:
 - [Modelo C4, site oficial](https://c4model.com/)
@@ -53,6 +53,6 @@ Cada capítulo de nível deverá conter:
 
 ## 7. Fonte de verdade e versionamento
 
-Os **blocos Mermaid nos capítulos Markdown** serão a fonte editável e renderizável no GitHub. Se forem necessários arquivos `.mmd` independentes em `diagrams/`, eles devem ser extraídos desses blocos, para evitar divergência entre duas cópias mantidas manualmente. A extração e a validação ficarão para a etapa 7.
+Os **blocos Mermaid nos capítulos Markdown** são a fonte editável e renderizável no GitHub. O [validador](../scripts/validate_docs.py) extrai arquivos temporários `.mmd`, sem duplicar fontes no repositório. No CI, a CLI renderiza SVGs temporários e os disponibiliza como artefatos para inspeção.
 
 Exemplos em C# também serão documentais. O repositório não deve exigir a execução de uma aplicação para que os níveis possam ser compreendidos.

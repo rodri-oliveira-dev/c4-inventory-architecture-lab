@@ -1,0 +1,4 @@
+# Local previews and temporary work
+node_modules/
+.tmp/
+.mermaid-preview/
