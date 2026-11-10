@@ -1,5 +1,5 @@
-// Etapa LikeC4 1: modelo único dos atores, sistema, contêineres e integrações.
-// As views context/container detalhadas serão entregues na etapa 2.
+// Modelo compartilhado: o contexto e os contêineres são projeções deste grafo.
+// A etapa 2 adiciona tecnologias de comunicação, sem criar novos elementos.
 model {
   operador = actor 'Operador de estoque' {
     description 'Cadastra produtos, registra movimentações e consulta saldos.'
@@ -41,11 +41,26 @@ model {
     description 'Recebe solicitações de envio de alerta feitas pelo worker.'
   }
 
-  operador -> estoque.web 'Cadastra, movimenta e consulta' 
-  gestor -> estoque.web 'Consulta críticos e ajusta mínimos'
-  estoque.web -> estoque.api 'Solicita operações e consultas'
-  vendas -> estoque.api 'Solicita baixa de estoque por venda'
-  estoque.api -> estoque.banco 'Lê e grava saldo, histórico e outbox'
-  estoque.worker -> estoque.banco 'Consulta e atualiza a outbox'
-  estoque.worker -> notificacoes 'Solicita envio de alertas'
+  operador -> estoque.web 'Cadastra, movimenta e consulta' {
+    technology 'HTTPS'
+  }
+  gestor -> estoque.web 'Consulta críticos e ajusta mínimos' {
+    technology 'HTTPS'
+  }
+  estoque.web -> estoque.api 'Solicita operações e consultas' {
+    technology 'JSON/HTTPS'
+  }
+  vendas -> estoque.api 'Solicita baixa de estoque por venda' {
+    technology 'JSON/HTTPS'
+  }
+  estoque.api -> estoque.banco 'Lê e grava saldo, histórico e outbox' {
+    technology 'PostgreSQL/TCP'
+  }
+  estoque.worker -> estoque.banco 'Consulta e atualiza a outbox' {
+    technology 'PostgreSQL/TCP'
+  }
+  estoque.worker -> notificacoes 'Solicita envio de alertas' {
+    // O contrato concreto com o provedor externo ainda não foi definido.
+    technology 'API externa (contrato a definir)'
+  }
 }

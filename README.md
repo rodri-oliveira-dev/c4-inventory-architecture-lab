@@ -28,7 +28,7 @@ O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiro
 
 ## LikeC4: segunda representação arquitetural
 
-Além dos diagramas Mermaid existentes, iniciamos a [alternativa LikeC4](likec4/README.md), baseada em **um modelo arquitetural compartilhado**. A primeira etapa estabelece a especificação dos tipos, os atores, os sistemas externos, os quatro contêineres e suas relações, com uma visualização inicial (`index`). Os capítulos Mermaid permanecem inalterados.
+Além dos diagramas Mermaid existentes, iniciamos a [alternativa LikeC4](likec4/README.md), baseada em **um modelo arquitetural compartilhado**. A fundação define os atores, as integrações e os quatro contêineres; a etapa 2 acrescenta as visões de [**Contexto e Contêineres**](likec4/visoes-contexto-conteineres.md) a partir do mesmo modelo. Os capítulos Mermaid continuam disponíveis em paralelo.
 
 Para explorar o modelo (Node.js 22):
 
@@ -38,7 +38,7 @@ npm run likec4:validate
 npm run likec4:dev
 ```
 
-O servidor de prévia LikeC4 usa o modelo em `likec4/`; os diagramas de contexto e contêineres definitivos serão adicionados na **etapa 2**. Depois serão incluídas as visões de componentes, os fluxos dinâmicos e a publicação, em PRs independentes. Consulte as [convenções e o roteiro](likec4/README.md). A validação inicial do modelo está incluída no workflow [Documentation Quality](.github/workflows/docs-quality.yml).
+O servidor de prévia LikeC4 usa o modelo em `likec4/`. A visualização `index` representa o **nível 1**, com navegação para `conteineres`, a visão do **nível 2**. As próximas etapas incluem componentes, fluxos dinâmicos e publicação, em PRs independentes. Consulte as [convenções e o roteiro](likec4/README.md). A validação inicial do modelo está incluída no workflow [Documentation Quality](.github/workflows/docs-quality.yml).
 
 ## Arquitetura que será documentada
 

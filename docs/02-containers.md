@@ -4,7 +4,7 @@
 
 O diagrama **Containers** amplia o [Sistema de Gestão de Estoque apresentado no nível 1](01-contexto.md). Em C4, um **contêiner** é uma aplicação executável ou um armazenamento de dados com responsabilidades próprias; **não significa necessariamente Docker**. Esta visão interessa especialmente a desenvolvedores, arquitetos, operações e pessoas que precisam entender a distribuição das responsabilidades, sem entrar em classes ou métodos.
 
-O sistema permanece **didático e hipotético**: o diagrama documenta escolhas de referência, e não uma aplicação já implementada ou implantada.
+O sistema permanece **didático e hipotético**: o diagrama documenta escolhas de referência, e não uma aplicação já implementada ou implantada. Consulte também a [visão correspondente em LikeC4](../likec4/visoes-contexto-conteineres.md#nível-2-contêineres-conteineres), derivada do mesmo modelo de arquitetura.
 
 ## Diagrama de contêineres
 

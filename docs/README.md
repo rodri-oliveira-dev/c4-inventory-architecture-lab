@@ -25,7 +25,8 @@ Este índice orienta a leitura do laboratório. Os **quatro níveis do C4** est�
 
 ## Representação alternativa: LikeC4
 
-- [Fundação do modelo LikeC4](../likec4/README.md) — tipagem de elementos, atores, integrações, contêineres e comandos locais; em desenvolvimento, sem substituir os diagramas Mermaid.
+- [Modelo compartilhado LikeC4](../likec4/README.md) — tipos, atores, integrações, contêineres e comandos locais.
+- [LikeC4: Contexto e Contêineres (etapa 2)](../likec4/visoes-contexto-conteineres.md) — duas projeções do mesmo modelo e comparação com Mermaid.
 
 ## Qualidade e publicação (etapa 7)
 
