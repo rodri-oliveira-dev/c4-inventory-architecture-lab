@@ -103,7 +103,7 @@ O [catálogo de decisões](decisoes-arquiteturais.md) detalha especialmente os A
 
 ## Próximo zoom: nível 3
 
-O capítulo `docs/03-componentes.md` (etapa 4) abrirá **apenas o contêiner API de Estoque** para explicar suas partes internas: endpoints HTTP, casos de uso, domínio e infraestrutura. A **Aplicação Web**, o **PostgreSQL**, o **Worker** e o **Sistema de Vendas** continuarão visíveis como dependências externas **à API**, mas não passarão a ser componentes dela.
+O [capítulo do nível 3: Componentes](03-componentes.md) abre **apenas o contêiner API de Estoque** para explicar suas partes internas: endpoints HTTP, casos de uso, domínio e infraestrutura. A **Aplicação Web**, o **PostgreSQL**, o **Worker** e o **Sistema de Vendas** continuarão visíveis como dependências externas **à API**, mas não passarão a ser componentes dela.
 
 Para retomar a visão de negócio, leia o [nível 1: Contexto](01-contexto.md). Para compreender as escolhas técnicas, consulte a [arquitetura de referência](arquitetura-referencia.md) e o [guia C4](guia-c4.md).
 

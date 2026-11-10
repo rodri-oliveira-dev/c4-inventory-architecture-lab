@@ -4,7 +4,7 @@
 
 Esta é uma **arquitetura hipotética para ensino do C4**, não a descrição de um serviço implementado. Escolhemos poucos elementos e um único caso de uso para manter os quatro níveis coerentes.
 
-**Sistema sob análise:** Sistema de Gestão de Estoque. Consulte os diagramas [nível 1: Contexto](01-contexto.md) e [nível 2: Contêineres](02-containers.md).
+**Sistema sob análise:** Sistema de Gestão de Estoque. Consulte os diagramas [nível 1: Contexto](01-contexto.md), [nível 2: Contêineres](02-containers.md) e [nível 3: Componentes da API](03-componentes.md).
 
 ## 2. Contêineres previstos
 
@@ -24,14 +24,14 @@ No C4, **contêiner** significa unidade executável ou de armazenamento, e não 
 
 **Decisão intencional:** não adicionar broker de mensagens nesta versão. O worker lê uma outbox persistida no PostgreSQL. Isso simplifica o exemplo sem acoplar a transação de estoque à disponibilidade do provedor.
 
-## 3. Responsabilidades dentro da API (base para nível 3)
+## 3. Responsabilidades dentro da API (detalhadas no nível 3)
 
 - **Interface de entrada:** endpoints HTTP para interface web e sistema de vendas.
 - **Aplicação:** casos de uso `RegistrarEntrada`, `RegistrarSaida`, `ConsultarSaldo` e `ConsultarMovimentacoes`.
 - **Domínio:** regras de saldo, limite mínimo e movimentação; sem dependência de transporte ou banco.
 - **Infraestrutura:** mapeamento de persistência, controle de concorrência e implementação dos repositórios.
 
-A organização é **modular em um único serviço**, com separação lógica inspirada em DDD e arquitetura hexagonal. Não pressupõe microsserviços nem projetos .NET separados para cada camada.
+O [diagrama de componentes da API](03-componentes.md) apresenta Endpoints HTTP, Movimentações de Estoque, Gestão e Consultas, Regras de Estoque e Persistência Transacional. A organização é **modular em um único serviço**, com separação lógica inspirada em DDD e arquitetura hexagonal. Não pressupõe microsserviços nem projetos .NET separados para cada camada.
 
 ## 4. Modelo conceitual de domínio (base para nível 4)
 

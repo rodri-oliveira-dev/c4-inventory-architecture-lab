@@ -10,7 +10,7 @@ Mostrar a mesma arquitetura com diferentes níveis de abstração, sem confundir
 | --- | --- | --- |
 | 1 | [`C4Context`](01-contexto.md) | Operador, gestor, sistema de estoque e sistemas externos |
 | 2 | [`C4Container`](02-containers.md) | Web, API, worker, PostgreSQL e sistemas externos |
-| 3 | `C4Component` | Componentes **da API**, dentro do contêiner escolhido |
+| 3 | [`C4Component`](03-componentes.md) | Componentes **da API**, dentro do contêiner escolhido |
 | 4 | `classDiagram` | Recorte das classes C# do caso de uso de saída |
 
 **Atenção:** o suporte do Mermaid a C4 é experimental e a apresentação pode variar conforme a versão e o renderizador. `classDiagram` representa o nível de código neste laboratório, mas não é uma sintaxe C4 específica. A validação automatizada e a escolha da versão do renderizador serão abordadas na etapa 7.
@@ -34,7 +34,7 @@ Referências:
 
 ## 4. Exemplo disponível
 
-O [diagrama do nível 1](01-contexto.md) utiliza `C4Context` com um único sistema central, duas pessoas e duas integrações externas. O [diagrama do nível 2](02-containers.md) amplia **o mesmo sistema** com quatro contêineres internos. As descrições e tabelas que acompanham o Mermaid são parte da documentação: os diagramas não substituem contexto e justificativas arquiteturais.
+O [diagrama do nível 1](01-contexto.md) utiliza `C4Context` com um único sistema central, duas pessoas e duas integrações externas. O [diagrama do nível 2](02-containers.md) amplia **o mesmo sistema** com quatro contêineres internos. O [diagrama do nível 3](03-componentes.md) abre **somente a API de Estoque** e revela seus componentes. As descrições e tabelas que acompanham o Mermaid são parte da documentação: os diagramas não substituem contexto e justificativas arquiteturais.
 
 ## 5. Formato dos documentos futuros
 
