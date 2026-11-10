@@ -64,7 +64,7 @@ sequenceDiagram
         W->>DB: Marca item como processado
         DB-->>W: Estado atualizado
     else Falha, timeout ou confirmação incerta
-        N-->>W: Erro ou confirmação ausente
+        Note over W,N: Erro reportado ou resposta ausente
         W->>DB: Registra tentativa para nova execução
         DB-->>W: Item segue elegível para retry
     end
@@ -89,7 +89,7 @@ Uma implementação com vários workers precisaria reivindicar itens de forma co
 | Estoque já em 5, saída 1 | Saldo 4, sem novo alerta de **cruzamento**. | RN-06 |
 | Falha ao inserir outbox antes de confirmar | Rollback de saldo, histórico e referência. | RN-07 |
 | Provedor falha após confirmação | Saldo permanece confirmado; worker retenta. | RN-07 |
-| Provedor envia, mas confirmação se perde | Reenvio é possível; deduplicação depende do contrato externo. | Entrega ao menos uma vez, não exatamente uma |
+| Provedor envia, mas confirmação se perde | Reenvio é possível; deduplicação depende do contrato externo. | Repetição possível; não há garantia de entrega única |
 
 **Concorrência e idempotência são problemas distintos.** A proteção de saldo impede duas **operações diferentes** de consumirem o mesmo estoque; a unicidade de `(Origem, ReferenciaExterna)` impede que a **mesma operação externa** seja registrada duas vezes. Uma consulta prévia de referência não basta sob concorrência. Mesmo com reconsulta após o bloqueio do produto, o banco deve impor a restrição única, inclusive quando a mesma chave é disputada em produtos diferentes. Se houver violação de unicidade, a transação perdedora faz rollback e consulta o registro vencedor para comparar os dados.
 
