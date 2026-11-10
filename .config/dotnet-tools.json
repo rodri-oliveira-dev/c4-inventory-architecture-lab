@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "rodrioliveira.adrguard": {
+      "version": "1.10.0",
+      "commands": [
+        "adr-guard"
+      ],
+      "rollForward": false
+    }
+  }
+}
