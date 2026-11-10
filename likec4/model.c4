@@ -1,0 +1,51 @@
+// Etapa LikeC4 1: modelo único dos atores, sistema, contêineres e integrações.
+// As views context/container detalhadas serão entregues na etapa 2.
+model {
+  operador = actor 'Operador de estoque' {
+    description 'Cadastra produtos, registra movimentações e consulta saldos.'
+  }
+
+  gestor = actor 'Gestor de estoque' {
+    description 'Consulta estoque crítico e configura limites mínimos.'
+  }
+
+  estoque = system 'Sistema de Gestão de Estoque' {
+    description 'Mantém produtos, saldos e movimentações; solicita alertas ao cruzar o estoque mínimo.'
+
+    web = application 'Aplicação Web' {
+      description 'Interface para operações manuais, consultas e gestão dos limites.'
+      technology 'SPA (framework não definido)'
+    }
+
+    api = application 'API de Estoque' {
+      description 'Expõe operações, regras de negócio e consistência transacional.'
+      technology 'ASP.NET Core / C# (.NET 10)'
+    }
+
+    worker = application 'Worker de Notificações' {
+      description 'Consome a outbox e solicita alertas de maneira assíncrona.'
+      technology '.NET Worker Service / C#'
+    }
+
+    banco = database 'Banco de Dados' {
+      description 'Produtos, saldos, histórico, referência externa e outbox.'
+      technology 'PostgreSQL'
+    }
+  }
+
+  vendas = externalSystem 'Sistema de Vendas' {
+    description 'Solicita baixa de unidades após uma venda, com referência idempotente.'
+  }
+
+  notificacoes = externalSystem 'Provedor de Notificações' {
+    description 'Recebe solicitações de envio de alerta feitas pelo worker.'
+  }
+
+  operador -> estoque.web 'Cadastra, movimenta e consulta' 
+  gestor -> estoque.web 'Consulta críticos e ajusta mínimos'
+  estoque.web -> estoque.api 'Solicita operações e consultas'
+  vendas -> estoque.api 'Solicita baixa de estoque por venda'
+  estoque.api -> estoque.banco 'Lê e grava saldo, histórico e outbox'
+  estoque.worker -> estoque.banco 'Consulta e atualiza a outbox'
+  estoque.worker -> notificacoes 'Solicita envio de alertas'
+}

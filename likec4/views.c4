@@ -1,0 +1,8 @@
+// Visão mínima para confirmar a navegação inicial e o modelo agregado.
+// A etapa 2 substituirá/expandirá esta visão com Contexto e Contêineres.
+views {
+  view index {
+    title 'Panorama inicial - Sistema de Gestão de Estoque'
+    include *
+  }
+}
