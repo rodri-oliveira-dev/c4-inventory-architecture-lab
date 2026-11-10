@@ -47,8 +47,11 @@ public sealed record NotificacaoPendente(
     Guid MovimentacaoId,
     string Tipo);
 
-public sealed class SaldoInsuficienteException()
-    : Exception("A quantidade solicitada excede o saldo disponível.");
+public sealed class SaldoInsuficienteException : Exception
+{
+    public SaldoInsuficienteException()
+        : base("A quantidade solicitada excede o saldo disponível.") { }
+}
 
 public sealed class EstoqueDoProduto
 {
