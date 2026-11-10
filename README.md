@@ -18,7 +18,7 @@ Consulte o [escopo funcional](docs/escopo-funcional.md) e a [arquitetura de refe
 
 | Nível | Pergunta principal | Representação planejada |
 | --- | --- | --- |
-| **1. System Context** | Quem utiliza o sistema e com quais sistemas ele interage? | `C4Context` |
+| **1. System Context** | Quem utiliza o sistema e com quais sistemas ele interage? | [C4Context: ver diagrama](docs/01-contexto.md) |
 | **2. Containers** | Quais aplicações e armazenamentos compõem a solução? | `C4Container` |
 | **3. Components** | Como a API é organizada internamente? | `C4Component` |
 | **4. Code** | Como as responsabilidades aparecem nas classes C#? | `classDiagram` |
@@ -38,22 +38,23 @@ Essas escolhas são **hipóteses didáticas**, não recomendações universais. 
 ## Roteiro de construção
 
 1. **Fundação:** README, escopo, arquitetura de referência e convenções.
-2. **Nível 1:** contexto do sistema.
+2. **Nível 1:** [contexto do sistema](docs/01-contexto.md) (disponível).
 3. **Nível 2:** contêineres.
 4. **Nível 3:** componentes internos da API.
 5. **Nível 4:** classes e exemplos ilustrativos em C#.
 6. **Fluxos e decisões:** sequência da movimentação e aprofundamento dos ADRs iniciais.
 7. **Qualidade e publicação:** validação de diagramas e links, revisão e preparação da versão 1.0.0. A validação dos ADRs foi antecipada para a etapa 1.
 
-Os diagramas e exemplos serão incorporados **gradualmente**. A ausência deles na etapa inicial é intencional; não há links para documentos ainda não criados.
+O [diagrama de contexto do nível 1](docs/01-contexto.md) já está disponível em Mermaid. Os demais níveis e exemplos serão incorporados **gradualmente**, conforme o roteiro.
 
 ## Comece por aqui
 
-1. [Índice da documentação](docs/README.md)
-2. [Escopo e regras de negócio](docs/escopo-funcional.md)
-3. [Arquitetura de referência](docs/arquitetura-referencia.md)
-4. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
-5. [Registro inicial de decisões](docs/decisoes-arquiteturais.md)
+1. [Nível 1: Contexto do Sistema de Gestão de Estoque](docs/01-contexto.md)
+2. [Índice da documentação](docs/README.md)
+3. [Escopo e regras de negócio](docs/escopo-funcional.md)
+4. [Arquitetura de referência](docs/arquitetura-referencia.md)
+5. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
+6. [Decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md)
 
 ## Validação de decisões arquiteturais
 
