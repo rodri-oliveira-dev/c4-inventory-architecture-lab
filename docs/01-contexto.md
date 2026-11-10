@@ -10,27 +10,25 @@ Neste laboratório, o sistema central é o **Sistema de Gestão de Estoque**. To
 
 ```mermaid
 C4Context
-    title Nivel 1 - Contexto do Sistema de Gestao de Estoque
+    title Nível 1 - Contexto do Sistema de Gestão de Estoque
 
-    Person(operador, "Operador de estoque", "Cadastra produtos, registra entradas e saidas e consulta saldos.")
-    Person(gestor, "Gestor de estoque", "Consulta produtos criticos e configura estoques minimos.")
+    Person(operador, "Operador de estoque", "Cadastra produtos, registra entradas e saídas e consulta saldos.")
+    Person(gestor, "Gestor de estoque", "Consulta produtos críticos e configura estoques mínimos.")
 
-    System(estoque, "Sistema de Gestao de Estoque", "Mantem produtos, saldos e movimentacoes e solicita alertas de estoque minimo.")
+    System(estoque, "Sistema de Gestão de Estoque", "Mantém produtos, saldos e movimentações e solicita alertas de estoque mínimo.")
 
     System_Ext(vendas, "Sistema de Vendas", "Solicita baixas de estoque associadas a vendas.")
-    System_Ext(notificacoes, "Provedor de Notificacoes", "Realiza o envio de alertas aos responsaveis pelo estoque.")
+    System_Ext(notificacoes, "Provedor de Notificações", "Realiza o envio de alertas aos responsáveis pelo estoque.")
 
     Rel(operador, estoque, "Cadastra, movimenta e consulta")
-    Rel(gestor, estoque, "Consulta saldos criticos e ajusta minimos")
-    Rel(vendas, estoque, "Solicita baixa de estoque por venda")
+    Rel(gestor, estoque, "Consulta saldos críticos e ajusta mínimos")
+    Rel(vendas, estoque, "Solicita baixa por venda")
     Rel(estoque, notificacoes, "Solicita envio de alertas")
 
     UpdateLayoutConfig($c4ShapeInRow="3")
 ```
 
 **Como interpretar:** as pessoas são apresentadas como `Person`; o software que estamos documentando é `System`; as duas integrações fora da nossa responsabilidade são `System_Ext`. As setas `Rel` indicam **quem inicia** cada interação e qual é seu propósito. O diagrama não afirma um protocolo, ordem de mensagens ou execução síncrona.
-
-> Os rótulos do bloco Mermaid usam grafia sem acentos para compatibilidade de renderização em diferentes versões. Os nomes e a explicação completa permanecem em português no texto abaixo.
 
 ## Elementos e responsabilidades
 
