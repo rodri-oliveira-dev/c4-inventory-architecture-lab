@@ -3,3 +3,4 @@ node_modules/
 .tmp/
 .mermaid-preview/
 likec4/dist/
+dist/

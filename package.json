@@ -13,6 +13,7 @@
   "scripts": {
     "likec4:validate": "cd likec4 && likec4 validate",
     "likec4:dev": "cd likec4 && likec4 serve",
-    "likec4:format": "cd likec4 && likec4 format"
+    "likec4:format": "cd likec4 && likec4 format",
+    "likec4:build:pages": "cd likec4 && likec4 build --output ../dist --base /c4-inventory-architecture-lab/ --use-hash-history --title \"C4 Inventory Architecture Lab | LikeC4\""
   }
 }

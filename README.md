@@ -2,6 +2,7 @@
 
 [![ADR Guard](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/adr-guard.yml/badge.svg)](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/adr-guard.yml)
 [![Documentation Quality](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/docs-quality.yml/badge.svg)](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/docs-quality.yml)
+[![LikeC4 Site](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/likec4-pages.yml/badge.svg)](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/likec4-pages.yml)
 
 Um laboratório **didático e orientado à documentação** para aprender a comunicar a arquitetura de um sistema de gestão de estoque com os **quatro níveis do Modelo C4**, diagramas **Mermaid** e pequenos exemplos em **C#/.NET**.
 
@@ -30,15 +31,18 @@ O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiro
 
 Além dos diagramas Mermaid existentes, iniciamos a [alternativa LikeC4](likec4/README.md), baseada em **um modelo arquitetural compartilhado**. A fundação define atores, integrações e contêineres; a etapa 2 acrescentou as visões de [**Contexto e Contêineres**](likec4/visoes-contexto-conteineres.md), e a etapa 3 abre [**os cinco Componentes da API**](likec4/visao-componentes.md) a partir do mesmo modelo. A etapa 4 acrescenta [**dois fluxos dinâmicos**](likec4/fluxos-dinamicos.md): baixa transacional e entrega eventual da outbox. Os capítulos Mermaid continuam disponíveis em paralelo.
 
+**Site interativo (após ativar Pages e integrar o workflow):** [C4 Inventory Architecture Lab — LikeC4](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/). Navegue entre Contexto, Contêineres, Componentes e os dois fluxos dinâmicos. O [guia de publicação](docs/likec4-vs-mermaid.md#processo-de-publicação) explica a configuração necessária.
+
 Para explorar o modelo (Node.js 22):
 
 ```bash
 npm install
 npm run likec4:validate
 npm run likec4:dev
+npm run likec4:build:pages
 ```
 
-O servidor de prévia LikeC4 usa o modelo em `likec4/`. A visualização `index` representa o **nível 1**, com navegação para `conteineres` (**nível 2**) e, na API, para `componentes` (**nível 3**). O **nível 4** segue com `classDiagram` Mermaid. As duas visões de sequência LikeC4 são `registrarSaida` e `entregarAlerta`; a exportação e publicação são a próxima etapa, em PR independente. Consulte as [convenções e o roteiro](likec4/README.md). A validação inicial do modelo está incluída no workflow [Documentation Quality](.github/workflows/docs-quality.yml).
+O servidor de prévia LikeC4 usa o modelo em `likec4/`. A visualização `index` representa o **nível 1**, com navegação para `conteineres` (**nível 2**) e, na API, para `componentes` (**nível 3**). O **nível 4** segue com `classDiagram` Mermaid. As duas visões de sequência LikeC4 são `registrarSaida` e `entregarAlerta`. A etapa 5 acrescenta a [publicação automática no GitHub Pages](.github/workflows/likec4-pages.yml) e uma [comparação didática Mermaid vs. LikeC4](docs/likec4-vs-mermaid.md). Consulte as [convenções e o roteiro](likec4/README.md). A validação inicial do modelo está incluída no workflow [Documentation Quality](.github/workflows/docs-quality.yml).
 
 ## Arquitetura que será documentada
 
@@ -76,6 +80,7 @@ Os quatro níveis já estão documentados: [Contexto](docs/01-contexto.md), [Con
 10. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
 11. [Decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md)
 12. [Preparação da release v1.0.0](docs/publicacao.md)
+13. [Mermaid vs. LikeC4 e publicação do site](docs/likec4-vs-mermaid.md)
 
 ## Validação de decisões arquiteturais
 

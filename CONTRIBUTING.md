@@ -19,7 +19,7 @@ Obrigado pelo interesse neste laboratório de documentação arquitetural.
 5. Ao alterar uma decisão arquitetural, crie ou atualize um ADR em `docs/adr/` e mantenha [o catálogo](docs/decisoes-arquiteturais.md) coerente.
 6. Execute `dotnet tool restore` e `dotnet tool run adr-guard -- check docs/adr` antes de enviar o PR (requer SDK .NET 10).
 7. Execute também `python3 -m unittest discover -s tests -v` e `python3 scripts/validate_docs.py --output-dir .tmp/mermaid` (Python 3.12+).
-8. Se modificar arquivos `.c4`, execute `npm install` e `npm run likec4:validate` (Node.js 22). Os arquivos em `likec4/` descrevem um único modelo; não duplique seus elementos em modelos independentes.
+8. Se modificar arquivos `.c4`, execute `npm install`, `npm run likec4:validate` e `npm run likec4:build:pages` (Node.js 22). Os arquivos em `likec4/` descrevem um único modelo; não duplique seus elementos em modelos independentes. O [LikeC4 Site CI](.github/workflows/likec4-pages.yml) valida e gera uma prévia em todo PR, publicando somente depois de mudanças na `main`.
 9. Não altere o status `Proposed` para `Accepted` sem aprovação humana e não inclua credenciais, dados reais ou código proprietário.
 
 O GitHub Actions valida ADRs com ADR Guard e documentação com [Documentation Quality](.github/workflows/docs-quality.yml). O [Dependabot](.github/dependabot.yml) propõe atualizações de GitHub Actions e do Mermaid CLI declarado no [package.json](package.json). O segundo job confere os links locais e renderiza Mermaid usando a CLI; a inspeção visual no GitHub continua importante.
