@@ -35,7 +35,7 @@ A visão `conteineres` tem escopo `of estoque`. Nesse escopo, `include *` traz o
 | `estoque.worker` — Worker de Notificações | .NET Worker Service / C# | Consumo posterior da outbox e solicitação de alertas. |
 | `estoque.banco` — Banco de Dados | PostgreSQL | Saldo, movimentações, referência de origem e outbox. |
 
-São preservadas as **sete relações direcionais** do [nível 2 Mermaid](../docs/02-containers.md):
+São preservadas as **sete relações direcionais em nível de contêiner** do [nível 2 Mermaid](../docs/02-containers.md). Três delas são agregações das relações detalhadas entre [componentes da API](visao-componentes.md), sem duplicação no modelo:
 
 | Origem → destino | Mecanismo informado no modelo |
 | --- | --- |
@@ -82,7 +82,7 @@ O fio condutor segue sendo a baixa de **10 unidades do SKU-001** (saldo **15 →
 
 ## Limitações e próximas etapas
 
-Esta etapa **não** modela componentes internos da API nem classes, endpoints, diagramas dinâmicos ou deployment. A **etapa 3 do LikeC4** acrescentará a visão do nível 3, preservando o `classDiagram` Mermaid como documentação de nível 4. A etapa 4 cobrirá os fluxos; a etapa 5 configurará exportação, publicação e revisão final.
+Esta visão não expõe componentes internos da API nem classes, endpoints, diagramas dinâmicos ou deployment. A [etapa 3 do LikeC4](visao-componentes.md) abre a API no nível 3 e preserva o `classDiagram` Mermaid como nível 4. A etapa 4 cobrirá os fluxos; a etapa 5 configurará exportação, publicação e revisão final.
 
 ### Referências
 

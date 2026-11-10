@@ -6,6 +6,8 @@ O nível 4 do [Modelo C4](https://c4model.com/diagrams/code) é um **zoom opcion
 
 O Mermaid não oferece um tipo `C4Code`; portanto, usamos `classDiagram` como **representação UML complementar do nível 4**, e não como uma extensão C4 nativa. O desenho é **ilustrativo**: o projeto continua sem API executável, banco provisionado ou worker implantado.
 
+O [zoom da API em LikeC4 (nível 3)](../likec4/visao-componentes.md) apresenta os cinco componentes que colaboram com este caso de uso. O nível 4 mantém **UML de classes no Mermaid**, sem tentar representar assinaturas C# como componentes arquiteturais.
+
 ## Diagrama de classes
 
 ```mermaid

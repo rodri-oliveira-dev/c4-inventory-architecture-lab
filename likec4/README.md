@@ -2,7 +2,7 @@
 
 Este diretório inicia uma **segunda representação do mesmo sistema** descrito nos quatro níveis [Mermaid](../docs/README.md). Aqui, o LikeC4 modela **elementos e relações uma única vez** e constrói visualizações derivadas, sem criar novos serviços de software ou outra arquitetura.
 
-**Estado atual:** etapa **2 de 5** da trilha LikeC4. As visões de [**Contexto e Contêineres**](visoes-contexto-conteineres.md) estão definidas em `views.c4` como projeções do modelo compartilhado. Os seis blocos Mermaid dos capítulos originais continuam disponíveis e **não são gerados automaticamente a partir do LikeC4**.
+**Estado atual:** etapa **3 de 5** da trilha LikeC4. [Contexto e Contêineres](visoes-contexto-conteineres.md) e [Componentes da API](visao-componentes.md) são três projeções do mesmo modelo. O nível 4 (Code) permanece em Mermaid, assim como os diagramas de sequência originais, e **não é gerado automaticamente pelo LikeC4**.
 
 ## Estrutura
 
@@ -10,9 +10,10 @@ Este diretório inicia uma **segunda representação do mesmo sistema** descrito
 | --- | --- |
 | [`likec4.config.json`](likec4.config.json) | Configuração e identificação do projeto LikeC4. |
 | [`specification.c4`](specification.c4) | Vocabulário único: ator, sistema, sistema externo, aplicação, banco e componente. |
-| [`model.c4`](model.c4) | Atores, fronteira do sistema, quatro contêineres e sete relações com tecnologias de comunicação. |
-| [`views.c4`](views.c4) | Duas visões: `index` (contexto) e `conteineres` (fronteira ampliada do sistema). |
-| [**Contexto e Contêineres**](visoes-contexto-conteineres.md) | Guia comparativo das duas visões, seus participantes, fluxos e limites. |
+| [`model.c4`](model.c4) | Atores, sistema, quatro contêineres, cinco componentes na API e relações compartilhadas em diferentes níveis. |
+| [`views.c4`](views.c4) | Três visões: `index` (contexto), `conteineres` (sistema ampliado) e `componentes` (API ampliada). |
+| [**Contexto e Contêineres**](visoes-contexto-conteineres.md) | Guia das duas primeiras visões e suas fronteiras. |
+| [**Componentes da API**](visao-componentes.md) | Zoom no contêiner API, cinco componentes, dependências e comparação com Mermaid. |
 
 ## Tecnologias e requisitos
 
@@ -32,16 +33,17 @@ O comando `likec4:dev` inicia uma prévia interativa local (porta padrão 5173).
 
 O workflow [Documentation Quality](../.github/workflows/docs-quality.yml) executa a validação do modelo LikeC4 após instalar as dependências npm. A exportação e publicação automatizadas das visões pertencem à etapa 5.
 
-## As duas visões disponíveis
+## As três visões disponíveis
 
 - **[`index`: Nível 1 / Contexto](visoes-contexto-conteineres.md#nível-1-contexto-index):** duas pessoas, sistema central e dois sistemas externos; quatro relações de negócio inferidas do modelo.
-- **[`conteineres`: Nível 2 / Contêineres](visoes-contexto-conteineres.md#nível-2-contêineres-conteineres):** fronteira do sistema ampliada, com quatro contêineres, participantes externos e sete relações. Ao selecionar o sistema na visão `index`, a navegação abre `conteineres`.
+- **[`conteineres`: Nível 2 / Contêineres](visoes-contexto-conteineres.md#nível-2-contêineres-conteineres):** fronteira do sistema ampliada, com quatro contêineres, participantes externos e sete relações agregadas. Ao selecionar o sistema na visão `index`, a navegação abre `conteineres`.
+- **[`componentes`: Nível 3 / Componentes da API](visao-componentes.md):** cinco componentes dentro da API e colaboradores externos. Selecionar a API em `conteineres` abre o novo zoom.
 
-Os detalhes, protocolos e critérios de comparação com Mermaid estão no [guia das visões](visoes-contexto-conteineres.md).
+Os detalhes, protocolos e critérios de comparação com Mermaid estão nos guias de [Contexto e Contêineres](visoes-contexto-conteineres.md) e de [Componentes da API](visao-componentes.md).
 
 ## Modelo compartilhado e invariantes
 
-**Fronteira:** `estoque` é o **Sistema de Gestão de Estoque**, com os contêineres `estoque.web`, `estoque.api`, `estoque.worker` e `estoque.banco`. Pessoas e sistemas externos não pertencem a essa fronteira.
+**Fronteira:** `estoque` é o **Sistema de Gestão de Estoque**, com os contêineres `estoque.web`, `estoque.api`, `estoque.worker` e `estoque.banco`. Somente `estoque.api` contém cinco componentes. Pessoas e sistemas externos permanecem fora da fronteira de `estoque`.
 
 | Identificador LikeC4 | Correspondente Mermaid |
 | --- | --- |
@@ -52,6 +54,7 @@ Os detalhes, protocolos e critérios de comparação com Mermaid estão no [guia
 | `estoque.api` | API de Estoque (ASP.NET Core / .NET 10) |
 | `estoque.worker` | Worker de Notificações (.NET) |
 | `estoque.banco` | Banco de Dados (PostgreSQL) |
+| `estoque.api.http`, `estoque.api.movimentacoes`, `estoque.api.gestao`, `estoque.api.regras`, `estoque.api.persistencia` | Cinco [componentes da API](visao-componentes.md), no C4 nível 3 |
 
 As relações preservam a iniciativa das chamadas: operadores e gestores usam a Web; Vendas chama a API; a API acessa o PostgreSQL; o Worker lê a outbox e solicita alertas ao provedor. **Não** existe relação direta API → Worker. O padrão outbox não pressupõe um broker nesta arquitetura.
 
@@ -60,8 +63,8 @@ O cenário de referência continua sendo a saída de **10 unidades** de `SKU-001
 ## Próximas etapas da trilha LikeC4
 
 1. **Fundação (concluída):** configuração, vocabulário e modelo compartilhado.
-2. **Contexto e Contêineres (concluída nesta branch):** vistas de níveis 1 e 2 com as mesmas fronteiras do Mermaid.
-3. **Componentes e Código:** aprofundar a API; manter o diagrama UML de classes em Mermaid, sem tentar converter métodos C# em caixas do LikeC4.
+2. **Contexto e Contêineres (concluída):** visões de níveis 1 e 2 com as mesmas fronteiras do Mermaid.
+3. **Componentes e Código (concluída nesta branch):** aprofundar a API nos cinco componentes; manter o diagrama UML de classes em Mermaid, sem tentar converter métodos C# em caixas do LikeC4.
 4. **Fluxos dinâmicos:** modelar a baixa e o processamento eventual da outbox.
 5. **CI/CD e publicação:** exportar, validar e disponibilizar as visões, atualizar índices e comparar ambas as representações.
 

@@ -4,7 +4,7 @@
 
 No [Modelo C4](https://c4model.com/diagrams/component), o diagrama **Component** aprofunda **um contêiner de cada vez**. Após a visão do [nível 2 (Containers)](02-containers.md), este capítulo abre apenas a **API de Estoque (ASP.NET Core, C# / .NET 10)**. Os demais contêineres aparecem como colaboradores **externos à fronteira da API**, mesmo que pertençam ao mesmo sistema de gestão de estoque.
 
-O objetivo continua sendo **explicar uma arquitetura hipotética**: não há serviços implantados, contratos HTTP publicados nem código executável. Aqui, *componente* significa um agrupamento coeso de responsabilidades de software, **não** uma classe C# nem, obrigatoriamente, um projeto ou um microsserviço.
+O objetivo continua sendo **explicar uma arquitetura hipotética**: não há serviços implantados, contratos HTTP publicados nem código executável. A [visão equivalente em LikeC4](../likec4/visao-componentes.md) utiliza o mesmo modelo compartilhado dos níveis 1 e 2, abrindo apenas a API. Aqui, *componente* significa um agrupamento coeso de responsabilidades de software, **não** uma classe C# nem, obrigatoriamente, um projeto ou um microsserviço.
 
 ## Diagrama de componentes
 

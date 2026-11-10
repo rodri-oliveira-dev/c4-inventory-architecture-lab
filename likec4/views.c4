@@ -1,6 +1,6 @@
-// Etapa LikeC4 2: as duas projeções usam SOMENTE elementos/relações de model.c4.
-// index (L1) agrega as relações dos filhos de estoque à fronteira do sistema.
-// conteineres (L2) expande os quatro filhos sem redefinir sistemas/atores.
+// Etapa LikeC4 3: três projeções do MESMO modelo (sem duplicar relações).
+// index (L1) mostra o sistema; conteineres (L2) abre seus filhos;
+// componentes (L3) abre apenas a API e mostra os colaboradores externos.
 views {
   view index {
     title 'Nível 1 - Contexto do Sistema de Gestão de Estoque'
@@ -21,6 +21,27 @@ views {
     title 'Nível 2 - Contêineres do Sistema de Gestão de Estoque'
     description 'Aplicação Web, API de Estoque, Worker, PostgreSQL e integrações externas.'
     include *
+
+    // A API abre a visão dos seus componentes sem expandi-los neste nível.
+    include estoque.api with {
+      navigateTo componentes
+    }
+
+    autoLayout LeftRight
+  }
+
+  // O escopo abre somente o contêiner API de Estoque.
+  // Elementos externos aparecem como colaboradores, sem serem
+  // redefinidos como componentes internos nem duplicar relações.
+  view componentes of estoque.api {
+    title 'Nível 3 - Componentes da API de Estoque'
+    description 'Endpoints, casos de uso, domínio, persistência e colaboradores externos.'
+    include *
+    include estoque.web
+    include vendas
+    include estoque.banco
+    include estoque.worker
+
     autoLayout LeftRight
   }
 }
