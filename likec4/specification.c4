@@ -1,0 +1,10 @@
+// Vocabulário compartilhado para as visões do laboratório.
+// Os nomes C4 são conceitos do domínio do modelo, não serviços executáveis.
+specification {
+  element actor
+  element system
+  element externalSystem
+  element application
+  element database
+  element component
+}

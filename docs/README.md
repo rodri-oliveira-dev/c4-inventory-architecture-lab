@@ -23,6 +23,10 @@ Este índice orienta a leitura do laboratório. Os **quatro níveis do C4** est�
 
 **Exemplos de apoio:** [C# do caso de uso](../examples/registrar-saida.md) · [consistência transacional, idempotência e outbox](../examples/persistencia-transacional.md).
 
+## Representação alternativa: LikeC4
+
+- [Fundação do modelo LikeC4](../likec4/README.md) — tipagem de elementos, atores, integrações, contêineres e comandos locais; em desenvolvimento, sem substituir os diagramas Mermaid.
+
 ## Qualidade e publicação (etapa 7)
 
 - [Automação: Documentation Quality](../.github/workflows/docs-quality.yml) — verifica links e âncoras locais e renderiza os seis blocos Mermaid com versão fixa da CLI.

@@ -2,11 +2,17 @@
   "name": "c4-inventory-architecture-lab-docs",
   "private": true,
   "version": "0.0.0",
-  "description": "Ferramentas para validar diagramas Mermaid da documentação C4",
+  "description": "Ferramentas de documentação arquitetural em Mermaid e LikeC4",
   "engines": {
     "node": ">=22 <23"
   },
   "devDependencies": {
-    "@mermaid-js/mermaid-cli": "11.17.1"
+    "@mermaid-js/mermaid-cli": "11.17.1",
+    "likec4": "1.60.0"
+  },
+  "scripts": {
+    "likec4:validate": "cd likec4 && likec4 validate",
+    "likec4:dev": "cd likec4 && likec4 serve",
+    "likec4:format": "cd likec4 && likec4 format"
   }
 }

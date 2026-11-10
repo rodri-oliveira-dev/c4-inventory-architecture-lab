@@ -26,6 +26,20 @@ Consulte o [escopo funcional](docs/escopo-funcional.md) e a [arquitetura de refe
 
 O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiros níveis. Para o quarto nível, usamos um **diagrama de classes**, não uma sintaxe `C4Code` inexistente. Saiba mais no [guia de modelagem](docs/guia-c4.md).
 
+## LikeC4: segunda representação arquitetural
+
+Além dos diagramas Mermaid existentes, iniciamos a [alternativa LikeC4](likec4/README.md), baseada em **um modelo arquitetural compartilhado**. A primeira etapa estabelece a especificação dos tipos, os atores, os sistemas externos, os quatro contêineres e suas relações, com uma visualização inicial (`index`). Os capítulos Mermaid permanecem inalterados.
+
+Para explorar o modelo (Node.js 22):
+
+```bash
+npm install
+npm run likec4:validate
+npm run likec4:dev
+```
+
+O servidor de prévia LikeC4 usa o modelo em `likec4/`; os diagramas de contexto e contêineres definitivos serão adicionados na **etapa 2**. Depois serão incluídas as visões de componentes, os fluxos dinâmicos e a publicação, em PRs independentes. Consulte as [convenções e o roteiro](likec4/README.md). A validação inicial do modelo está incluída no workflow [Documentation Quality](.github/workflows/docs-quality.yml).
+
 ## Arquitetura que será documentada
 
 - **Aplicação web:** consultas e operações realizadas por pessoas.
@@ -92,7 +106,7 @@ O comando Python verifica links e a estrutura dos blocos. Para comprovar **rende
 O [Dependabot](.github/dependabot.yml) verifica semanalmente:
 
 - **GitHub Actions** nos workflows, incluindo ações oficiais e a ação ADR Guard.
-- **npm** no `package.json` da raiz, utilizado para instalar `@mermaid-js/mermaid-cli` no workflow de documentação.
+- **npm** no `package.json` da raiz, utilizado para instalar `@mermaid-js/mermaid-cli` e `likec4` no workflow de documentação.
 
 As atualizações `minor` e `patch` são agrupadas, enquanto mudanças `major` recebem PRs próprios e precisam passar pelo CI antes de merge. O manifesto local [`.config/dotnet-tools.json`](.config/dotnet-tools.json) contém o ADR Guard da CLI, cuja versão deve ser conferida manualmente: este repositório não contém um projeto .NET para o Dependabot NuGet atualizar. Não há dependências Python de terceiros ou uma imagem Docker neste laboratório.
 
