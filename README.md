@@ -31,7 +31,7 @@ O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiro
 
 Além dos diagramas Mermaid existentes, iniciamos a [alternativa LikeC4](likec4/README.md), baseada em **um modelo arquitetural compartilhado**. A fundação define atores, integrações e contêineres; a etapa 2 acrescentou as visões de [**Contexto e Contêineres**](likec4/visoes-contexto-conteineres.md), e a etapa 3 abre [**os cinco Componentes da API**](likec4/visao-componentes.md) a partir do mesmo modelo. A etapa 4 acrescenta [**dois fluxos dinâmicos**](likec4/fluxos-dinamicos.md): baixa transacional e entrega eventual da outbox. Os capítulos Mermaid continuam disponíveis em paralelo.
 
-**Site interativo (após ativar Pages e integrar o workflow):** [C4 Inventory Architecture Lab — LikeC4](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/). Navegue entre Contexto, Contêineres, Componentes e os dois fluxos dinâmicos. O [guia de publicação](docs/likec4-vs-mermaid.md#processo-de-publicação) explica a configuração necessária.
+**Site publicado:** [C4 Inventory Architecture Lab — LikeC4](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/). Navegue entre Contexto, Contêineres, Componentes e os dois fluxos dinâmicos. Para iPhone ou navegadores móveis com dificuldades de renderização, existe uma [**versão leve sem JavaScript**](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/mobile/) com os seis diagramas Mermaid em SVG; ela é escolhida automaticamente na entrada em telas iOS compactas, com opção explícita de abrir o modo interativo. Veja a [compatibilidade mobile](docs/compatibilidade-mobile.md) e o [guia de publicação](docs/likec4-vs-mermaid.md#processo-de-publicação).
 
 Para explorar o modelo (Node.js 22):
 

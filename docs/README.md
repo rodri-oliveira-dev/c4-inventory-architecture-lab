@@ -30,6 +30,7 @@ Este índice orienta a leitura do laboratório. Os **quatro níveis do C4** est�
 - [LikeC4: Componentes da API (etapa 3)](../likec4/visao-componentes.md) — terceiro zoom, cinco componentes internos, relações e integração com o nível 4 Mermaid.
 - [LikeC4: Fluxos dinâmicos (etapa 4)](../likec4/fluxos-dinamicos.md) — confirmação da baixa e entrega eventual do alerta como duas visões de sequência.
 - [Mermaid vs. LikeC4: trade-offs e publicação](likec4-vs-mermaid.md) — matriz de critérios técnicos, observações do laboratório, escolha por cenário e deploy via GitHub Pages.
+- [Compatibilidade mobile](compatibilidade-mobile.md) — alternativa de baixo consumo para iPhone, limitações e validações recomendadas.
 
 ## Qualidade e publicação (etapa 7)
 

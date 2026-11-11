@@ -34,6 +34,9 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Test mobile fallback generator
+        run: python3 -m unittest discover -s tests -p 'test_mobile_fallback.py' -v
+
       - name: Install pinned documentation dependencies
         run: npm install --no-save --no-package-lock --no-audit --no-fund
 
@@ -52,6 +55,36 @@ jobs:
           test "$(find dist/assets -type f | wc -l)" -gt 0
           grep -Fq '/c4-inventory-architecture-lab/' dist/index.html
           echo "LikeC4 build generated an entry point and assets for the repository Pages path." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Render static Mermaid diagrams for lightweight mobile site
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/validate_docs.py --output-dir "$RUNNER_TEMP/mermaid-mobile"
+          mkdir -p dist/mobile/diagrams
+          # Chromium in the disposable GitHub Actions runner needs this flag.
+          printf '%s\n' '{"args":["--no-sandbox","--disable-setuid-sandbox"]}' > "$RUNNER_TEMP/puppeteer-mobile.json"
+          count=0
+          while IFS= read -r -d '' source; do
+            target="dist/mobile/diagrams/$(basename "${source%.mmd}").svg"
+            "./node_modules/.bin/mmdc" -p "$RUNNER_TEMP/puppeteer-mobile.json" -i "$source" -o "$target"
+            test -s "$target"
+            count=$((count + 1))
+          done < <(find "$RUNNER_TEMP/mermaid-mobile" -name '*.mmd' -type f -print0 | sort -z)
+          test "$count" -eq 6
+          echo "Rendered $count SVG diagrams for iOS fallback." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Add early iOS redirect and mobile HTML
+        run: python3 scripts/build_mobile_fallback.py --site-dir dist
+
+      - name: Verify lightweight mobile entry point
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/mobile/index.html
+          test "$(find dist/mobile/diagrams -name '*.svg' -type f | wc -l)" -eq 6
+          grep -q 'data-mobile-fallback' dist/index.html
+          echo "iOS entry point and mobile static viewer verified." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload downloadable site preview
         uses: actions/upload-artifact@v4

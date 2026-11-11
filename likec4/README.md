@@ -35,6 +35,8 @@ npm run likec4:build:pages
 
 O comando `likec4:dev` inicia uma prévia interativa local (porta padrão 5173). O comando `likec4:validate` verifica o modelo de referência. Para formatar os arquivos `.c4`, use `npm run likec4:format`.
 
+A [versão leve para iPhone](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/mobile/) não executa o motor visual do LikeC4: mostra os seis diagramas Mermaid pré-renderizados como SVG, com link de retorno à experiência completa. Um redirecionamento executado antes dos bundles do LikeC4 seleciona esse modo em telas iOS compactas; `?full=1` desativa o redirecionamento. Consulte [compatibilidade mobile](../docs/compatibilidade-mobile.md) e suas limitações.
+
 O workflow [Documentation Quality](../.github/workflows/docs-quality.yml) valida o modelo LikeC4 após instalar as dependências npm. O novo [LikeC4 Site](../.github/workflows/likec4-pages.yml) compila o site em PRs e, após merge na `main`, publica a versão estática no GitHub Pages. A [comparação Mermaid vs. LikeC4](../docs/likec4-vs-mermaid.md) explica publicação, limites e configuração de Pages.
 
 ## As três visões disponíveis
