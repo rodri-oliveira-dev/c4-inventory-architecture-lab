@@ -8,6 +8,22 @@ Um laboratório **didático e orientado à documentação** para aprender a comu
 
 > **Objetivo:** demonstrar como a mesma solução pode ser apresentada, do contexto de negócio às classes de código, preservando consistência entre os níveis. **Não** se trata de um produto de estoque pronto para produção.
 
+## O que é o Modelo C4?
+
+O **Modelo C4**, criado por Simon Brown, é uma abordagem para **visualizar e comunicar a arquitetura de software**. Em vez de tentar mostrar tudo em um único desenho, ele propõe diferentes níveis de detalhe, como o zoom de um mapa: primeiro vemos o sistema em seu ambiente; depois, aproximamos a visão para entender sua estrutura interna e, quando necessário, sua implementação.
+
+O nome **C4** vem dos quatro níveis de diagramas: **Contexto (Context)**, **Contêineres (Containers)**, **Componentes (Components)** e **Código (Code)**. Cada nível responde a perguntas diferentes e se destina a públicos com necessidades distintas. A tabela abaixo apresenta essas perguntas no cenário deste laboratório.
+
+### Três conceitos para começar
+
+- **Contêiner não significa Docker:** no C4, pode ser uma aplicação executável ou um armazenamento de dados, como a aplicação web, a API ou o PostgreSQL deste exemplo.
+- **Componente não é necessariamente uma classe:** é um conjunto coeso de funcionalidades e responsabilidades dentro de um contêiner. As classes e interfaces que o implementam aparecem em um nível mais detalhado.
+- **C4 não é uma ferramenta de desenho:** o modelo é independente de notação e tecnologia. Neste repositório, usamos **Mermaid** e **LikeC4** para representar a mesma arquitetura.
+
+**É preciso usar os quatro níveis?** Não. Em projetos reais, escolha os diagramas que ajudam a comunicar a solução; muitas equipes precisam apenas de Contexto e Contêineres. Aqui, mostramos os quatro para fins de aprendizado. O nível de Código é opcional e usa um recorte de classes C#, sem exigir a execução de uma aplicação.
+
+**Referência:** [documentação oficial do Modelo C4](https://c4model.com/) e [visão geral dos diagramas](https://c4model.com/diagrams).
+
 ## O cenário
 
 Uma operação precisa cadastrar produtos, registrar entradas e saídas de mercadorias, consultar saldos e emitir alertas quando um produto atinge seu estoque mínimo.
