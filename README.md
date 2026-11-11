@@ -34,14 +34,32 @@ Consulte o [escopo funcional](docs/escopo-funcional.md) e a [arquitetura de refe
 
 ## Os quatro níveis
 
-| Nível | Pergunta principal | Representação planejada |
-| --- | --- | --- |
-| **1. System Context** | Quem utiliza o sistema e com quais sistemas ele interage? | [C4Context: ver diagrama](docs/01-contexto.md) |
-| **2. Containers** | Quais aplicações e armazenamentos compõem a solução? | [C4Container: ver diagrama](docs/02-containers.md) |
-| **3. Components** | Como a API é organizada internamente? | [C4Component: ver diagrama](docs/03-componentes.md) |
-| **4. Code** | Como as responsabilidades aparecem nas classes C#? | [classDiagram: ver diagrama](docs/04-codigo.md) |
+Esta é a **trilha principal de aprendizado**. Siga os capítulos de cima para baixo: cada nível aproxima a visão do mesmo Sistema de Gestão de Estoque, sem mudar seu objetivo de negócio.
 
-O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiros níveis. Para o quarto nível, usamos um **diagrama de classes**, não uma sintaxe `C4Code` inexistente. Saiba mais no [guia de modelagem](docs/guia-c4.md).
+| Etapa | Pergunta que o diagrama responde | O que você aprenderá | Leia o capítulo |
+| --- | --- | --- | --- |
+| **1. Contexto (System Context)** | Quem usa o sistema e com quais sistemas externos ele interage? | Identificar pessoas, sistemas externos e a fronteira do sistema em estudo. | [Começar pelo Contexto](docs/01-contexto.md) |
+| **2. Contêineres (Containers)** | Quais aplicações e armazenamentos formam a solução? | Reconhecer a aplicação web, a API, o worker, o banco e suas comunicações. | [Avançar para Contêineres](docs/02-containers.md) |
+| **3. Componentes (Components)** | Como a API se organiza internamente? | Distinguir responsabilidades dentro de um único contêiner e suas dependências. | [Explorar Componentes](docs/03-componentes.md) |
+| **4. Código (Code)** | Como um comportamento é implementado em classes e interfaces? | Relacionar o caso de uso `RegistrarSaida` aos objetos de domínio e contratos C#. | [Examinar o Código](docs/04-codigo.md) |
+
+### Como acompanhar cada capítulo
+
+1. **Comece pela pergunta** do nível: ela define o que o diagrama precisa comunicar.
+2. **Observe a fronteira e os relacionamentos**: identifique o que está dentro e fora do recorte.
+3. **Acompanhe o mesmo exemplo**: uma saída de 10 unidades reduz o saldo de 15 para 5 e pode gerar um alerta.
+4. **Compare com o próximo nível**: veja quais detalhes aparecem quando a visão se aproxima.
+
+É possível percorrer toda a trilha **diretamente pelo GitHub**, sem instalar .NET, Node.js ou executar a aplicação. Os capítulos apresentam o desenho e explicam também **o que foi deixado de fora** de cada visão.
+
+O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiros níveis. Para o quarto, utilizamos um **diagrama de classes** (`classDiagram`), pois não existe uma sintaxe Mermaid `C4Code`. Veja as [convenções de modelagem](docs/guia-c4.md).
+
+### Depois dos quatro níveis
+
+- **Entenda a ordem das interações:** [fluxo de movimentação, confirmação e falhas](docs/fluxo-movimentacao.md). O diagrama de sequência é complementar, **não** um quinto nível do C4.
+- **Aproxime-se da implementação:** [exemplo C# de `RegistrarSaida`](examples/registrar-saida.md) e [índice de exemplos e persistência](examples/README.md), que ilustram o comportamento sem constituir uma aplicação pronta.
+- **Investigue as escolhas:** [decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md), com justificativas e trade-offs.
+- **Consulte outros materiais:** [índice completo da documentação](docs/README.md), para explorar os assuntos por tema.
 
 ## LikeC4: segunda representação arquitetural
 
@@ -69,34 +87,6 @@ O servidor de prévia LikeC4 usa o modelo em `likec4/`. A visualização `index`
 - **Integrações externas:** sistema de vendas e provedor de notificações.
 
 Essas escolhas são **hipóteses didáticas**, não recomendações universais. Os motivos e limites estão em [decisões arquiteturais](docs/decisoes-arquiteturais.md).
-
-## Roteiro de construção
-
-1. **Fundação:** README, escopo, arquitetura de referência e convenções.
-2. **Nível 1:** [contexto do sistema](docs/01-contexto.md) (disponível).
-3. **Nível 2:** [contêineres do sistema](docs/02-containers.md) (disponível).
-4. **Nível 3:** [componentes internos da API](docs/03-componentes.md) (disponível).
-5. **Nível 4:** [classes e exemplos ilustrativos em C#](docs/04-codigo.md) (disponível).
-6. **Fluxos e decisões:** [sequência da movimentação](docs/fluxo-movimentacao.md) e aprofundamento dos ADRs 0003 a 0007 (disponível).
-7. **Qualidade e publicação:** [validação automática de Mermaid e links](.github/workflows/docs-quality.yml), revisão e [preparação da v1.0.0](docs/publicacao.md) (disponível).
-
-Os quatro níveis já estão documentados: [Contexto](docs/01-contexto.md), [Contêineres](docs/02-containers.md), [Componentes](docs/03-componentes.md) e [Código](docs/04-codigo.md). O nível 4 utiliza `classDiagram` e pequenos [exemplos C#](examples/registrar-saida.md). O [fluxo de movimentação](docs/fluxo-movimentacao.md) ilustra a confirmação transacional e a entrega eventual. A validação de diagramas e links Markdown está configurada na etapa 7.
-
-## Comece por aqui
-
-1. [Nível 1: Contexto do Sistema de Gestão de Estoque](docs/01-contexto.md)
-2. [Nível 2: Contêineres do Sistema de Gestão de Estoque](docs/02-containers.md)
-3. [Nível 3: Componentes da API de Estoque](docs/03-componentes.md)
-4. [Nível 4: Código do caso de uso RegistrarSaida](docs/04-codigo.md)
-5. [Fluxo de movimentação: sequência e falhas](docs/fluxo-movimentacao.md)
-6. [Exemplos C# e persistência](examples/README.md)
-7. [Índice da documentação](docs/README.md)
-8. [Escopo e regras de negócio](docs/escopo-funcional.md)
-9. [Arquitetura de referência](docs/arquitetura-referencia.md)
-10. [Guia dos níveis C4 e Mermaid](docs/guia-c4.md)
-11. [Decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md)
-12. [Preparação da release v1.0.0](docs/publicacao.md)
-13. [Mermaid vs. LikeC4 e publicação do site](docs/likec4-vs-mermaid.md)
 
 ## Validação de decisões arquiteturais
 
