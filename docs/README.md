@@ -29,7 +29,7 @@ Este índice orienta a leitura do laboratório. Os **quatro níveis do C4** est�
 - [LikeC4: Contexto e Contêineres (etapa 2)](../likec4/visoes-contexto-conteineres.md) — duas projeções do mesmo modelo e comparação com Mermaid.
 - [LikeC4: Componentes da API (etapa 3)](../likec4/visao-componentes.md) — terceiro zoom, cinco componentes internos, relações e integração com o nível 4 Mermaid.
 - [LikeC4: Fluxos dinâmicos (etapa 4)](../likec4/fluxos-dinamicos.md) — confirmação da baixa e entrega eventual do alerta como duas visões de sequência.
-- [Mermaid vs. LikeC4 e publicação (etapa 5)](likec4-vs-mermaid.md) — comparação das representações, build do site e deploy via GitHub Pages.
+- [Mermaid vs. LikeC4: trade-offs e publicação](likec4-vs-mermaid.md) — matriz de critérios técnicos, observações do laboratório, escolha por cenário e deploy via GitHub Pages.
 
 ## Qualidade e publicação (etapa 7)
 
