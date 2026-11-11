@@ -4,15 +4,17 @@
 [![Documentation Quality](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/docs-quality.yml/badge.svg)](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/docs-quality.yml)
 [![LikeC4 Site](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/likec4-pages.yml/badge.svg)](https://github.com/rodri-oliveira-dev/c4-inventory-architecture-lab/actions/workflows/likec4-pages.yml)
 
-Um laboratório **didático e orientado à documentação** para aprender a comunicar a arquitetura de um sistema de gestão de estoque com os **quatro níveis do Modelo C4**, diagramas **Mermaid** e pequenos exemplos em **C#/.NET**.
+Um laboratório de documentação arquitetural para **aprender o Modelo C4 na prática**, usando um sistema fictício de gestão de estoque, diagramas **Mermaid** e **LikeC4** e exemplos ilustrativos em **C#/.NET**.
 
-> **Objetivo:** demonstrar como a mesma solução pode ser apresentada, do contexto de negócio às classes de código, preservando consistência entre os níveis. **Não** se trata de um produto de estoque pronto para produção.
+> **Objetivo:** mostrar como comunicar a mesma arquitetura em diferentes níveis de detalhe, do contexto do sistema ao código. Os diagramas e exemplos são didáticos: **não existe uma aplicação de estoque pronta para executar ou usar em produção**.
+
+**Primeiro contato com C4?** Leia a introdução abaixo e siga a [trilha dos quatro níveis](#os-quatro-níveis), começando pelo Contexto. Não é necessário instalar ferramentas.
 
 ## O que é o Modelo C4?
 
 O **Modelo C4**, criado por Simon Brown, é uma abordagem para **visualizar e comunicar a arquitetura de software**. Em vez de tentar mostrar tudo em um único desenho, ele propõe diferentes níveis de detalhe, como o zoom de um mapa: primeiro vemos o sistema em seu ambiente; depois, aproximamos a visão para entender sua estrutura interna e, quando necessário, sua implementação.
 
-O nome **C4** vem dos quatro níveis de diagramas: **Contexto (Context)**, **Contêineres (Containers)**, **Componentes (Components)** e **Código (Code)**. Cada nível responde a perguntas diferentes e se destina a públicos com necessidades distintas. A tabela abaixo apresenta essas perguntas no cenário deste laboratório.
+O nome **C4** vem dos quatro níveis de diagramas: **Contexto (Context)**, **Contêineres (Containers)**, **Componentes (Components)** e **Código (Code)**. Cada nível responde a perguntas diferentes e se destina a públicos com necessidades distintas. A [trilha dos quatro níveis](#os-quatro-níveis) relaciona essas perguntas ao cenário deste laboratório.
 
 ### Três conceitos para começar
 
@@ -89,6 +91,20 @@ O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiro
 - **Investigue as escolhas:** [decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md), com justificativas e trade-offs.
 - **Consulte outros materiais:** [índice completo da documentação](docs/README.md), para explorar os assuntos por tema.
 
+## Arquitetura de referência
+
+Para tornar os diagramas concretos, o laboratório adota estas **tecnologias e responsabilidades hipotéticas**:
+
+| Elemento | Responsabilidade no exemplo |
+| --- | --- |
+| **Aplicação web** | Interface para consultas e movimentações realizadas por pessoas. |
+| **API ASP.NET Core (.NET 10)** | Receber solicitações, aplicar regras de estoque e registrar operações transacionais. |
+| **Worker .NET** | Processar posteriormente as notificações pendentes. |
+| **PostgreSQL** | Persistir produtos, saldos, movimentações e registros de notificação pendente (*outbox*). |
+| **Sistemas externos** | Sistema de Vendas solicita baixas; Provedor de Notificações entrega alertas. |
+
+Essas escolhas **não são recomendações universais** nem evidência de sistemas implantados. Para entender os limites de cada responsabilidade, consulte a [arquitetura de referência detalhada](docs/arquitetura-referencia.md) e as [decisões arquiteturais propostas](docs/decisoes-arquiteturais.md).
+
 ## Visualize a arquitetura: Mermaid e LikeC4
 
 **Você não precisa instalar nada para estudar este laboratório.** Há duas formas complementares de explorar o **mesmo Sistema de Gestão de Estoque**:
@@ -118,50 +134,35 @@ O **C4 é o modelo de arquitetura**, enquanto Mermaid e LikeC4 são ferramentas 
 
 Essa parte é **opcional** para o aprendizado dos níveis C4. Para usar Node.js 22, validar o modelo, abrir a prévia local ou gerar o site, siga os [comandos e requisitos no guia LikeC4](likec4/README.md). A [publicação automatizada](.github/workflows/likec4-pages.yml) e seus detalhes estão explicados no [guia de comparação e publicação](docs/likec4-vs-mermaid.md#processo-de-publicação).
 
-## Arquitetura que será documentada
+## Manutenção e contribuição
 
-- **Aplicação web:** consultas e operações realizadas por pessoas.
-- **API ASP.NET Core (.NET 10):** casos de uso, regras de negócio, integrações e acesso aos dados.
-- **Worker .NET:** entrega assíncrona de alertas de estoque mínimo.
-- **PostgreSQL:** persistência transacional de produtos, saldos, movimentações e mensagens pendentes de notificação.
-- **Integrações externas:** sistema de vendas e provedor de notificações.
+Esta seção é **opcional para quem deseja apenas estudar o C4**. Os detalhes de desenvolvimento e governança estão em [Como contribuir](CONTRIBUTING.md).
 
-Essas escolhas são **hipóteses didáticas**, não recomendações universais. Os motivos e limites estão em [decisões arquiteturais](docs/decisoes-arquiteturais.md).
+### Decisões arquiteturais
 
-## Validação de decisões arquiteturais
+As escolhas técnicas são documentadas em [Architecture Decision Records (ADRs)](docs/decisoes-arquiteturais.md): registros que explicam o contexto, a decisão e suas consequências. Os ADRs deste laboratório permanecem com status **Proposed** (propostos), sem aprovação formal.
 
-As decisões são registradas como [ADRs propostos](docs/decisoes-arquiteturais.md). Para instalar a versão fixada do **ADR Guard** e validar localmente (requer SDK .NET 10):
+O workflow [ADR Guard](.github/workflows/adr-guard.yml) verifica a conformidade desses registros. Para validar localmente, use o SDK .NET 10 e a versão da ferramenta declarada em [`.config/dotnet-tools.json`](.config/dotnet-tools.json):
 
 ```bash
 dotnet tool restore
 dotnet tool run adr-guard -- check docs/adr
 ```
 
-O [GitHub Actions](.github/workflows/adr-guard.yml) executa a **Action oficial ADR Guard v1.10.0** em pull requests e na `main`, independentemente de quais arquivos mudaram.
+### Qualidade da documentação
 
-## Qualidade da documentação
+O workflow [Documentation Quality](.github/workflows/docs-quality.yml) executa testes, verifica **links e âncoras Markdown locais**, valida o modelo LikeC4 e tenta renderizar os seis diagramas Mermaid. As versões das ferramentas JavaScript são declaradas no [`package.json`](package.json). Links externos não são verificados automaticamente por HTTP.
 
-O workflow [Documentation Quality](.github/workflows/docs-quality.yml) roda em todo pull request para `main`, pushes para `main` e manualmente. Ele verifica links e âncoras Markdown locais, extrai os blocos Mermaid dos capítulos e tenta renderizá-los com **Mermaid CLI 11.17.1**, sem manter cópias `.mmd` no Git. Os SVGs gerados ficam disponíveis como artefatos do workflow. A versão do Mermaid CLI é declarada em [`package.json`](package.json) e instalada pelo CI a partir desse manifesto, permitindo atualizações propostas pelo Dependabot.
-
-Verificação local (Python 3.12+):
+Para executar os testes e a validação estrutural localmente (Python 3.12+):
 
 ```bash
 python3 -m unittest discover -s tests -v
 python3 scripts/validate_docs.py --output-dir .tmp/mermaid
 ```
 
-O comando Python verifica links e a estrutura dos blocos. Para comprovar **renderização**, execute também o Mermaid CLI `11.17.1` sobre cada `.mmd` extraído, como no workflow. Links externos não são consultados via HTTP no CI para evitar instabilidade de rede e limites de requisição.
+**Atenção:** esses comandos Python não comprovam a renderização visual dos diagramas. O CI usa a Mermaid CLI para gerar SVGs, disponibilizados como artefatos; a inspeção humana das imagens e da coerência arquitetural continua necessária.
 
-## Atualizações de dependências
-
-O [Dependabot](.github/dependabot.yml) verifica semanalmente:
-
-- **GitHub Actions** nos workflows, incluindo ações oficiais e a ação ADR Guard.
-- **npm** no `package.json` da raiz, utilizado para instalar `@mermaid-js/mermaid-cli` e `likec4` no workflow de documentação.
-
-As atualizações `minor` e `patch` são agrupadas, enquanto mudanças `major` recebem PRs próprios e precisam passar pelo CI antes de merge. O manifesto local [`.config/dotnet-tools.json`](.config/dotnet-tools.json) contém o ADR Guard da CLI, cuja versão deve ser conferida manualmente: este repositório não contém um projeto .NET para o Dependabot NuGet atualizar. Não há dependências Python de terceiros ou uma imagem Docker neste laboratório.
-
-Para contribuir, consulte [CONTRIBUTING.md](CONTRIBUTING.md). Para publicar, consulte o [checklist de v1.0.0](docs/publicacao.md).
+O [Dependabot](.github/dependabot.yml) propõe atualizações de GitHub Actions e dependências npm. Para executar ou publicar o site LikeC4, veja o [guia específico](likec4/README.md). Para preparar uma versão documental, consulte o [checklist de publicação](docs/publicacao.md).
 
 ## Licença
 
