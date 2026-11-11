@@ -4,6 +4,12 @@ Este repositório é um laboratório de arquitetura **orientado à documentaçã
 
 ## Unreleased
 
+### Compatibilidade mobile
+
+- Visão alternativa leve para dispositivos iOS compactos: seis diagramas Mermaid em SVG, sem JavaScript ou dependência do renderizador interativo na página mobile.
+- Redirecionamento antecipado no HTML do LikeC4 com opção explícita de usar o visualizador completo (`?full=1`).
+- Testes do gerador e verificação do fallback no workflow do GitHub Pages. Trata-se de mitigação a validar em Safari/WebView no dispositivo real, não de correção comprovada da falha do navegador.
+
 ### LikeC4: trilha complementar
 
 - Modelo arquitetural compartilhado com três visões estruturais e duas dinâmicas.

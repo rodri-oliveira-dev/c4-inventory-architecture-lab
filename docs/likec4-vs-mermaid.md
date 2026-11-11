@@ -12,7 +12,7 @@ Este laboratório representa um **único Sistema de Gestão de Estoque** em duas
 | Componentes (C4 L3) | [`C4Component`](03-componentes.md) | `componentes`, abrindo apenas `estoque.api`. |
 | Código (C4 L4) | [`classDiagram`](04-codigo.md) com classes e interfaces C#. | **Mantido em Mermaid**: LikeC4 não substitui a representação UML de métodos/atributos. |
 | Fluxos | Dois [`sequenceDiagram`](fluxo-movimentacao.md), com mensagens e alternativas. | `registrarSaida` e `entregarAlerta`, visões dinâmicas com participantes do modelo. |
-| Navegação | Índice de documentos e links entre capítulos no GitHub. | Site interativo com navegação entre as cinco visões. |
+| Navegação | Índice de documentos e links entre capítulos no GitHub. | Site interativo com navegação entre as cinco visões; em iOS compacto, o fallback opta por uma [página de SVGs Mermaid](compatibilidade-mobile.md), sem renderização interativa. |
 | Validação | Extração, links locais e renderização em SVG no Documentation Quality. | `likec4 validate` e build de site no LikeC4 Site CI. |
 | Publicação | Markdown é renderizado diretamente pelo GitHub. | GitHub Pages com build estático do LikeC4. |
 
@@ -108,7 +108,7 @@ npm run likec4:validate
 npm run likec4:build:pages
 ```
 
-O conteúdo do site é gerado em `dist/` na raiz, ignorado pelo Git. Os arquivos do diretório não precisam ser versionados.
+O conteúdo do site é gerado em `dist/` na raiz, ignorado pelo Git. Os arquivos do diretório não precisam ser versionados. No mesmo build, o workflow extrai e renderiza os seis diagramas Mermaid existentes, publica `dist/mobile/` e injeta no HTML inicial um redirecionamento antecipado para telas iOS compactas. A opção `?full=1` permite acessar a interface interativa; a [documentação mobile](compatibilidade-mobile.md) descreve limitações e testes. Essa alternativa **não é uma renderização LikeC4** nem prova que o problema original do WebKit foi corrigido.
 
 ### Referências
 
