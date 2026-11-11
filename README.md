@@ -89,22 +89,34 @@ O Mermaid oferece sintaxes experimentais para os diagramas C4 dos três primeiro
 - **Investigue as escolhas:** [decisões arquiteturais e ADRs](docs/decisoes-arquiteturais.md), com justificativas e trade-offs.
 - **Consulte outros materiais:** [índice completo da documentação](docs/README.md), para explorar os assuntos por tema.
 
-## LikeC4: segunda representação arquitetural
+## Visualize a arquitetura: Mermaid e LikeC4
 
-Além dos diagramas Mermaid existentes, iniciamos a [alternativa LikeC4](likec4/README.md), baseada em **um modelo arquitetural compartilhado**. A fundação define atores, integrações e contêineres; a etapa 2 acrescentou as visões de [**Contexto e Contêineres**](likec4/visoes-contexto-conteineres.md), e a etapa 3 abre [**os cinco Componentes da API**](likec4/visao-componentes.md) a partir do mesmo modelo. A etapa 4 acrescenta [**dois fluxos dinâmicos**](likec4/fluxos-dinamicos.md): baixa transacional e entrega eventual da outbox. Os capítulos Mermaid continuam disponíveis em paralelo.
+**Você não precisa instalar nada para estudar este laboratório.** Há duas formas complementares de explorar o **mesmo Sistema de Gestão de Estoque**:
 
-**Site publicado:** [C4 Inventory Architecture Lab — LikeC4](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/). Navegue entre Contexto, Contêineres, Componentes e os dois fluxos dinâmicos. Para iPhone ou navegadores móveis com dificuldades de renderização, existe uma [**versão leve sem JavaScript**](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/mobile/) com os seis diagramas Mermaid em SVG; ela é escolhida automaticamente na entrada em telas iOS compactas, com opção explícita de abrir o modo interativo. Veja a [compatibilidade mobile](docs/compatibilidade-mobile.md) e o [guia de publicação](docs/likec4-vs-mermaid.md#processo-de-publicação).
+- **[Ler os diagramas Mermaid no GitHub](docs/01-contexto.md):** siga os capítulos dos quatro níveis, com diagramas embutidos no Markdown e explicações sobre cada decisão de modelagem. É a opção recomendada para quem está começando.
+- **[Explorar o site interativo LikeC4](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/):** navegue do **Contexto** aos **Contêineres** e aos **Componentes da API**, ampliando progressivamente a mesma arquitetura. O site também apresenta dois fluxos dinâmicos: registro da saída e entrega do alerta.
 
-Para explorar o modelo (Node.js 22):
+**Em dispositivos móveis:** se a visualização interativa não funcionar bem, abra a [versão leve com seis diagramas SVG](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/mobile/). Ela inclui os quatro níveis e dois fluxos de sequência, mas **não** oferece a navegação interativa do LikeC4. Consulte as [limitações de compatibilidade](docs/compatibilidade-mobile.md).
 
-```bash
-npm install
-npm run likec4:validate
-npm run likec4:dev
-npm run likec4:build:pages
-```
+### Qual é a diferença entre Mermaid e LikeC4?
 
-O servidor de prévia LikeC4 usa o modelo em `likec4/`. A visualização `index` representa o **nível 1**, com navegação para `conteineres` (**nível 2**) e, na API, para `componentes` (**nível 3**). O **nível 4** segue com `classDiagram` Mermaid. As duas visões de sequência LikeC4 são `registrarSaida` e `entregarAlerta`. A etapa 5 acrescenta a [publicação automática no GitHub Pages](.github/workflows/likec4-pages.yml) e uma [comparação didática Mermaid vs. LikeC4](docs/likec4-vs-mermaid.md). Consulte as [convenções e o roteiro](likec4/README.md). A validação inicial do modelo está incluída no workflow [Documentation Quality](.github/workflows/docs-quality.yml).
+O **C4 é o modelo de arquitetura**, enquanto Mermaid e LikeC4 são ferramentas utilizadas para representá-lo. Elas **não criam sistemas diferentes** neste laboratório.
+
+| Aspecto | Mermaid | LikeC4 |
+| --- | --- | --- |
+| **Como os diagramas são definidos** | Cada capítulo Markdown contém seu próprio diagrama. | Elementos e relações são definidos em um modelo compartilhado, utilizado por diferentes visões. |
+| **Níveis disponíveis aqui** | Contexto, Contêineres, Componentes e Código. | Contexto, Contêineres e Componentes. |
+| **Nível 4 (Código)** | Um `classDiagram` mostra um recorte de classes e interfaces C#. | Não há uma visão equivalente de código implementada neste laboratório. |
+| **Fluxos dinâmicos** | Diagramas de sequência nos capítulos. | Duas visões dinâmicas que reutilizam os participantes do modelo. |
+| **Como explorar** | Leitura guiada e links entre documentos no GitHub. | Navegação visual interativa no site publicado. |
+
+**Como comparar na prática:** leia primeiro o [Contexto em Mermaid](docs/01-contexto.md) e depois abra a visão inicial do [site LikeC4](https://rodri-oliveira-dev.github.io/c4-inventory-architecture-lab/). Observe que os atores, os sistemas externos e a fronteira do sistema continuam os mesmos. Repita o exercício nos níveis de [Contêineres](docs/02-containers.md) e [Componentes](docs/03-componentes.md).
+
+**Importante:** os modelos Mermaid e LikeC4 são mantidos em paralelo; **um não é gerado automaticamente a partir do outro**. A consistência entre os dois precisa ser revisada quando a arquitetura muda. Para entender os critérios de escolha, os trade-offs e as limitações observadas, consulte [Mermaid vs. LikeC4](docs/likec4-vs-mermaid.md).
+
+### Quer executar ou modificar o LikeC4 localmente?
+
+Essa parte é **opcional** para o aprendizado dos níveis C4. Para usar Node.js 22, validar o modelo, abrir a prévia local ou gerar o site, siga os [comandos e requisitos no guia LikeC4](likec4/README.md). A [publicação automatizada](.github/workflows/likec4-pages.yml) e seus detalhes estão explicados no [guia de comparação e publicação](docs/likec4-vs-mermaid.md#processo-de-publicação).
 
 ## Arquitetura que será documentada
 
