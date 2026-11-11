@@ -26,11 +26,39 @@ O nome **C4** vem dos quatro níveis de diagramas: **Contexto (Context)**, **Con
 
 ## O cenário
 
-Uma operação precisa cadastrar produtos, registrar entradas e saídas de mercadorias, consultar saldos e emitir alertas quando um produto atinge seu estoque mínimo.
+Imagine uma operação comercial que precisa cadastrar produtos, registrar entradas e saídas de mercadorias, consultar saldos e avisar quando é necessário repor um item. Para estudar o C4, vamos acompanhar **a mesma saída de estoque** em todos os níveis, mudando apenas a quantidade de detalhes apresentada.
 
-O fio condutor da documentação é uma **saída de 10 unidades**: um operador ou sistema de vendas solicita a baixa; a aplicação valida as regras, registra a movimentação, atualiza o saldo e, quando necessário, agenda uma notificação.
+### Um exemplo concreto: saída de 10 unidades
 
-Consulte o [escopo funcional](docs/escopo-funcional.md) e a [arquitetura de referência](docs/arquitetura-referencia.md).
+| Informação | Valor |
+| --- | --- |
+| **Produto** | `SKU-001` |
+| **Saldo inicial** | 15 unidades |
+| **Estoque mínimo** | 5 unidades |
+| **Saída solicitada** | 10 unidades |
+| **Saldo após a saída** | 5 unidades |
+
+O que acontece nesse exemplo?
+
+1. Um **operador de estoque** solicita a saída pela aplicação web. A mesma operação também pode ser solicitada pelo **Sistema de Vendas**, uma integração externa.
+2. A **API de Estoque** verifica se a quantidade é válida e se há saldo suficiente. Em uma transação, registra a movimentação e reduz o saldo de **15 para 5**.
+3. Como o saldo passou de **acima do mínimo** para **igual ao mínimo**, a API grava uma notificação pendente **na mesma transação**. Esse registro é chamado de *outbox*: ele permite enviar o alerta depois, sem depender da disponibilidade do serviço de notificações para confirmar a saída.
+4. A saída é confirmada. Posteriormente, o **worker** lê a pendência e solicita o alerta ao provedor externo. Uma falha no envio não desfaz a movimentação já confirmada.
+
+**E se a operação não puder ser concluída?** Com apenas 8 unidades disponíveis, uma saída de 10 seria recusada, sem alterar o saldo. Se o Sistema de Vendas repetir uma solicitação externa já processada com a mesma referência, ela não deve descontar outras 10 unidades. Essa proteção contra processamento duplicado é chamada de **idempotência**.
+
+### Como o mesmo exemplo aparece em cada nível?
+
+| Nível C4 | O que observar no exemplo |
+| --- | --- |
+| **[1. Contexto](docs/01-contexto.md)** | **Quem** solicita a saída, qual sistema é responsável pelo estoque e quais sistemas externos participam. Não detalha aplicações nem processamento interno. |
+| **[2. Contêineres](docs/02-containers.md)** | **Onde** estão as responsabilidades: aplicação web, API, PostgreSQL e worker. Mostra também as relações com os serviços externos. |
+| **[3. Componentes](docs/03-componentes.md)** | **Como a API se organiza** para receber a solicitação, aplicar regras e persistir a movimentação e a notificação pendente. O foco é apenas o interior da API. |
+| **[4. Código](docs/04-codigo.md)** | **Quais classes e interfaces** participam do caso de uso `RegistrarSaida`, incluindo regras de estoque e o contrato da operação transacional. |
+
+**Importante:** os quatro diagramas mostram principalmente **a estrutura** do sistema em diferentes níveis de aproximação, não uma sequência detalhada de eventos. Para ver a ordem das interações, a confirmação da transação e o envio posterior do alerta, consulte o [fluxo de movimentação](docs/fluxo-movimentacao.md), uma visão dinâmica complementar.
+
+Para conhecer todas as regras e os limites do exemplo, leia o [escopo funcional](docs/escopo-funcional.md) e a [arquitetura de referência](docs/arquitetura-referencia.md).
 
 ## Os quatro níveis
 
